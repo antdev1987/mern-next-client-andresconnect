@@ -1,9 +1,32 @@
+/* container */
+.container-default {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
 .flipCard {
   overflow: hidden;
 }
 
-.flipCard--front:hover .profile{
+.flipCard--front:hover .profile {
   scale: 1.1;
+}
+
+.flipCard--back {
+  overflow-y: hidden;
+}
+
+.flipCard--back .scroll {
+  overflow-y: scroll;  
+  border: 1px solid red;
+  height: 100%;
+}
+
+.flipCard--back .scroll::-webkit-scrollbar {
+  /* display: none; */
 }
 
 .flipCard--back:hover .back {

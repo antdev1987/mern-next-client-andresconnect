@@ -1,10 +1,11 @@
-import Layout from "@/components/Layout/Layout";
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { useSession, getSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import { GoogleLogin } from "@react-oauth/google";
-import { toast } from "react-toastify";
+import Layout from '@/components/Layout/Layout';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSession, getSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
+import { GoogleLogin } from '@react-oauth/google';
+import { toast } from 'react-toastify';
+import Scrollbars from 'react-custom-scrollbars';
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
 export async function getServerSideProps(context) {
@@ -14,7 +15,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: query.redirect === "/shipping" ? "/shipping" : "/",
+        destination: query.redirect === '/shipping' ? '/shipping' : '/',
         permanent: false,
       },
     };
@@ -36,8 +37,6 @@ const Login = () => {
 
   const router = useRouter();
 
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,19 +45,17 @@ const Login = () => {
     const password = passwordRef.current.value;
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(email)) {
-      setWarningText("Email is invalid");
+      setWarningText('Email is invalid');
       return;
     }
     if (email.trim().length === 0 || password.trim().length === 0) {
-      setWarningText("One field is empty");
+      setWarningText('One field is empty');
       return;
     }
-    setWarningText("");
+    setWarningText('');
 
-
-
-    const result = await signIn("credentials", {
-      action:'login',
+    const result = await signIn('credentials', {
+      action: 'login',
       email,
       password,
       redirect: false,
@@ -67,8 +64,8 @@ const Login = () => {
     if (result.error) {
       toast.error(result.error);
     } else {
-      router.replace("/");
-      toast.success("User Authenticated");
+      router.replace('/');
+      toast.success('User Authenticated');
     }
   };
 
@@ -79,7 +76,7 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      const result = await signIn("google", {
+      const result = await signIn('google', {
         access_token: response.credential,
         redirect: false,
       });
@@ -136,24 +133,45 @@ const Login = () => {
 
         <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
-            
             {!isLoading ? (
               <GoogleLogin
                 className=" disabled"
                 clientId={process.env.GOOGLE_ID}
                 onSuccess={handleLoginGoogle}
                 onError={() => {
-                  toast.error("Login Failed");
+                  toast.error('Login Failed');
                 }}
               />
-            )
-          : <div>Loading...</div>
-          }
-
-
+            ) : (
+              <div>Loading...</div>
+            )}
           </div>
         </div>
       </section>
+
+      <Scrollbars style={{ height: 100 }}>
+        <div>
+     
+          <ul className="mt-3 ">
+            <li>
+              <i class="bi bi-briefcase text-danger"></i>
+              <span className="ms-2">My work: Artist</span>
+            </li>
+            <li className="mt-2">
+              <i class="bi bi-briefcase text-danger"></i>
+              <span className="ms-2">Speaks: English, Spanish</span>
+            </li>
+            <li className="mt-2">
+              <i class="bi bi-briefcase text-danger"></i>
+              <span className="ms-2">Lives in: Mexico City, Mexico</span>
+            </li>
+            <li className="mt-2">
+              <i class="bi bi-briefcase text-danger"></i>
+              <span className="ms-2">Born: 1 de Nov de 2023</span>
+            </li>
+          </ul>
+        </div>
+      </Scrollbars>
     </Layout>
   );
 };
