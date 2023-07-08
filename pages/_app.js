@@ -3,6 +3,8 @@ import { SessionProvider, useSession } from "next-auth/react";
 import {  useRouter } from "next/router";
 import Layout from "@/components/Layout/Layout";
 import { ToastContainer,toast } from "react-toastify";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 
 import '@/styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,7 +17,7 @@ export default function App({
 
 
   return (
-    // <GoogleOAuthProvider clientId={`${process.env.GOOGLE_ID}`}>
+    <GoogleOAuthProvider clientId={`${process.env.GOOGLE_ID}`}>
       <SessionProvider session={session}>
         {/* <StoreProvider> */}
           <ToastContainer />
@@ -29,7 +31,7 @@ export default function App({
           )}
         {/* </StoreProvider> */}
       </SessionProvider>
-    // </GoogleOAuthProvider>
+     </GoogleOAuthProvider>
   );
 }
 

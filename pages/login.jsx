@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession, getSession } from "next-auth/react";
-// import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
@@ -35,6 +35,8 @@ const Login = () => {
   const passwordRef = useRef();
 
   const router = useRouter();
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,19 +72,21 @@ const Login = () => {
     }
   };
 
-  // const handleLoginGoogle = async (response) => {
-  //   //implementation of the function of login with google using the package @react-oauth/google
+  const handleLoginGoogle = async (response) => {
+    //implementation of the function of login with google using the package @react-oauth/google
 
-  //   try {
-  //     setIsLoading(true);
-  //     const result = await signIn("google", {
-  //       tokenId: response.credential,
-  //       redirect: false,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+    // console.log(response)
+
+    try {
+      setIsLoading(true);
+      const result = await signIn("google", {
+        access_token: response.credential,
+        redirect: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Layout title="Login">
@@ -130,7 +134,7 @@ const Login = () => {
           </button>
         </form>
 
-        {/* <div className="w-50 py-4 border">
+        <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
             
             {!isLoading ? (
@@ -148,7 +152,7 @@ const Login = () => {
 
 
           </div>
-        </div> */}
+        </div>
       </section>
     </Layout>
   );
