@@ -93,7 +93,7 @@ export default NextAuth({
     //       console.log(error);
     //     }
     //   }
-    // },
+     },
 
     jwt: async ({ token, user, account, profile }) => {
       // Add user info to JWT payload
