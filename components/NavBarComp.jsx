@@ -8,9 +8,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-const session = null;
+import { useSession, signOut } from "next-auth/react";
 
 const NavBarComp = () => {
+  const { data: session } = useSession();
+
   return (
     <Navbar bg="dark" variant="dark" expand="md">
       <Container fluid="lg">
@@ -38,12 +40,9 @@ const NavBarComp = () => {
               <i className="bi bi-cart4"></i> About Us
             </Nav.Link>
 
-
             <Nav.Link as={Link} href="/contact">
               <i className="bi bi-cart4"></i> Contact Us
             </Nav.Link>
-
-
           </Nav>
 
           <Nav
@@ -51,13 +50,14 @@ const NavBarComp = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link as={Link} href="/cart">
-              {" "}
-              <i className="bi bi-cart4"></i> Iniciar Sesion
-            </Nav.Link>
-
             {!session && (
               <Nav.Link as={Link} href="/login">
+                {" "}
+                <i className="bi bi-cart4"></i> Iniciar Sesion
+              </Nav.Link>
+            )}
+            {!session && (
+              <Nav.Link as={Link} href="/register">
                 <i className="bi bi-person-fill-lock"></i> Registrarse
               </Nav.Link>
             )}
@@ -65,7 +65,9 @@ const NavBarComp = () => {
             {session && (
               <NavDropdown
                 title={session.user.name}
-                id="navbarScrollingDropdown"
+                // id="navbarScrollingDropdown"
+                className='my-auto'
+                align="end"
               >
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
