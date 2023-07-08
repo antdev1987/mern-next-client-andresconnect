@@ -64,11 +64,11 @@ export default NextAuth({
   ],
 
   callbacks: {
-    // signIn: async ({ user, account }) => {
+    signIn: async ({ user, account }) => {
 
-    //   if(account.provider !== "google"){
-    //     return true
-    //   }
+      if(account.provider !== "google"){
+        return true
+      }
 
     //   if (account.provider === "google") {
     //     console.log("in google auth");
@@ -116,6 +116,6 @@ export default NextAuth({
 
   secret: process.env.NEXT_PUBLIC_SECRET,
   pages: {
-    signIn: "/login", //Need to define custom login page (if using)
+    login: "/login", //Need to define custom login page (if using)
   },
 });
