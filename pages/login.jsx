@@ -1,8 +1,8 @@
 import Layout from "@/components/Layout/Layout";
 import React, { useEffect, useRef, useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 

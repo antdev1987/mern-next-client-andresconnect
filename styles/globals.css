@@ -1,0 +1,42 @@
+.flipCard {
+  overflow: hidden;
+}
+
+.flipCard--front:hover .profile{
+  scale: 1.1;
+}
+
+.flipCard--back:hover .back {
+  scale: 1.2;
+}
+
+.img-house {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.profile {
+  transition: scale 300ms ease-in;
+}
+
+.img-profile {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.flipCard {
+  position: relative;
+  height: 430px;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  transition: scale 300ms ease-in;
+}
