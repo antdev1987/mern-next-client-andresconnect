@@ -66,53 +66,47 @@ const FlipCard = () => {
       </div>
 
       <div className="flipCard flipCard--back p-1">
-        <div className="scroll">
-          <div className="profile text-center pt-2">
-            <img
-              src="https://a0.muscache.com/im/pictures/user/User-167065374/original/56a96e89-588b-4406-93d0-57eecdf662c1.jpeg?im_w=240"
-              alt=""
-              loading="lazy"
-              decoding="async"
-              height={100}
-              width={100}
-              onClick={handleClick}
-              className="img-profile pointer"
-            />
-
-            <h3 className="mb-0 mt-2">John Doe</h3>
-            <p className="text-muted mb-0 mt-2">Starting hosting in</p>
-          </div>
-
-          <ul className="mt-3 ">
-            <li>
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">My work: Artist</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Speaks: English, Spanish</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Lives in: Mexico City, Mexico</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Born: 1 de Nov de 2023</span>
-            </li>
-          </ul>
-
-          <div className="text-center">
-            <button className="w-100 btn btn-outline-danger">
-              Mostrar Mas
-            </button>
-          </div>
-
-          <i
-            class="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"
+        <div className="profile text-center pt-2">
+          <img
+            src="https://a0.muscache.com/im/pictures/user/User-167065374/original/56a96e89-588b-4406-93d0-57eecdf662c1.jpeg?im_w=240"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            height={100}
+            width={100}
             onClick={handleClick}
-          ></i>
+            className="img-profile pointer"
+          />
+
+          <h3 className="mb-0 mt-2">John Doe</h3>
+          <p className="text-muted mb-0 mt-2">Starting hosting in</p>
         </div>
+
+        <ul className="mt-3 scroll">
+          <li>
+            <i class="bi bi-briefcase text-danger"></i>
+            <span className="ms-2">My work: Artist</span>
+          </li>
+          <li className="mt-2">
+            <i class="bi bi-briefcase text-danger"></i>
+            <span className="ms-2">Speaks: English, Spanish</span>
+          </li>
+          <li className="mt-2">
+            <i class="bi bi-briefcase text-danger"></i>
+            <span className="ms-2">Lives in: Mexico City, Mexico</span>
+          </li>
+          <li className="mt-2">
+            <i class="bi bi-briefcase text-danger"></i>
+            <span className="ms-2">Born: 1 de Nov de 2023</span>
+          </li>
+        </ul>
+
+        <button className="w-100 btn btn-outline-danger">Mostrar Mas</button>
+
+        <i
+          class="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"
+          onClick={handleClick}
+        ></i>
       </div>
     </ReactCardFlip>
   );

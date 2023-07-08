@@ -17,16 +17,20 @@
 
 .flipCard--back {
   overflow-y: hidden;
+  backface-visibility: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .flipCard--back .scroll {
   overflow-y: scroll;  
-  border: 1px solid red;
-  height: 100%;
+  backface-visibility: inherit;
+  height: 8rem;
 }
 
 .flipCard--back .scroll::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
 
 .flipCard--back:hover .back {
@@ -54,12 +58,13 @@
 
 .flipCard {
   position: relative;
-  height: 430px;
+  height: 410px;
 }
 
 .back {
   position: absolute;
   top: 0;
+  left: 0;
   cursor: pointer;
   transition: scale 300ms ease-in;
 }
