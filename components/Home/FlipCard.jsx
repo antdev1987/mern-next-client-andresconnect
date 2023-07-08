@@ -54,7 +54,7 @@ const FlipCard = () => {
           <div className="d-flex justify-content-between gap-2 fs-6 mt-2">
             <h3 className="mb-0 fs-6">San Ramon, Costa Rica</h3>
 
-            <i class="bi bi-star-fill ms-auto"></i>
+            <i className="bi bi-star-fill ms-auto"></i>
             <p className="mb-0"> 4.86</p>
           </div>
           <span className="d-block">Stay with riley - artist</span>
@@ -84,19 +84,19 @@ const FlipCard = () => {
 
         <ul className="mt-3 scroll">
           <li>
-            <i class="bi bi-briefcase text-danger"></i>
+            <i className="bi bi-briefcase text-danger"></i>
             <span className="ms-2">My work: Artist</span>
           </li>
           <li className="mt-2">
-            <i class="bi bi-briefcase text-danger"></i>
+            <i className="bi bi-briefcase text-danger"></i>
             <span className="ms-2">Speaks: English, Spanish</span>
           </li>
           <li className="mt-2">
-            <i class="bi bi-briefcase text-danger"></i>
+            <i className="bi bi-briefcase text-danger"></i>
             <span className="ms-2">Lives in: Mexico City, Mexico</span>
           </li>
           <li className="mt-2">
-            <i class="bi bi-briefcase text-danger"></i>
+            <i className="bi bi-briefcase text-danger"></i>
             <span className="ms-2">Born: 1 de Nov de 2023</span>
           </li>
         </ul>
@@ -104,7 +104,7 @@ const FlipCard = () => {
         <button className="w-100 btn btn-outline-danger">Mostrar Mas</button>
 
         <i
-          class="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"
+          className="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"
           onClick={handleClick}
         ></i>
       </div>

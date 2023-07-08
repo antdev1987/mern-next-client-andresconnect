@@ -5,7 +5,6 @@ import { useSession, getSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 import { GoogleLogin } from '@react-oauth/google';
 import { toast } from 'react-toastify';
-import Scrollbars from 'react-custom-scrollbars';
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
 export async function getServerSideProps(context) {
@@ -148,30 +147,6 @@ const Login = () => {
           </div>
         </div>
       </section>
-
-      <Scrollbars style={{ height: 100 }}>
-        <div>
-     
-          <ul className="mt-3 ">
-            <li>
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">My work: Artist</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Speaks: English, Spanish</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Lives in: Mexico City, Mexico</span>
-            </li>
-            <li className="mt-2">
-              <i class="bi bi-briefcase text-danger"></i>
-              <span className="ms-2">Born: 1 de Nov de 2023</span>
-            </li>
-          </ul>
-        </div>
-      </Scrollbars>
     </Layout>
   );
 };
