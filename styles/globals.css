@@ -24,7 +24,7 @@
 }
 
 .flipCard--back .scroll {
-  overflow-y: scroll;  
+  overflow-y: scroll;
   backface-visibility: inherit;
   height: 8rem;
 }
@@ -37,9 +37,13 @@
   scale: 1.2;
 }
 
+.flipCard-images {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 .img-house {
   width: 100%;
-  border-radius: 20px;
   object-fit: cover;
 }
 

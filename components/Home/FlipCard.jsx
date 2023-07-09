@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
+import { Carousel } from 'react-bootstrap';
 import ReactCardFlip from 'react-card-flip';
 
 const FlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [onHover, setOnHover] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -17,17 +18,52 @@ const FlipCard = () => {
       flipSpeedFrontToBack={2}
     >
       <div className="flipCard flipCard--front p-1">
-        <div>
-          <img
-            src={
-              'https://a0.muscache.com/im/pictures/4936b993-2d49-4f02-adc8-f182351d6e82.jpg?im_w=720'
-            }
-            loading="lazy"
-            decoding="async"
-            width={250}
-            height={200}
-            className="img-house"
-          />
+        <div
+          className="flipCard-images"
+          onMouseOver={() => {
+            console.log(onHover), setOnHover(true);
+          }}
+          onMouseLeave={() => setOnHover(false)}
+        >
+          <Carousel interval={onHover ? 1500 : null} pause={false}>
+            <Carousel.Item>
+              <img
+                src={
+                  'https://a0.muscache.com/im/pictures/857ae784-efa8-426c-b9a2-222a267ff3e2.jpg?im_w=720'
+                }
+                loading="lazy"
+                decoding="async"
+                width={250}
+                height={200}
+                className="img-house"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                src={
+                  'https://a0.muscache.com/im/pictures/58b74c9c-e0b6-4a52-8cea-7dd95ddbaa5d.jpg?im_w=720'
+                }
+                loading="lazy"
+                decoding="async"
+                width={250}
+                height={200}
+                className="img-house"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                src={
+                  'https://a0.muscache.com/im/pictures/4936b993-2d49-4f02-adc8-f182351d6e82.jpg?im_w=720'
+                }
+                loading="lazy"
+                decoding="async"
+                width={250}
+                height={200}
+                className="img-house"
+              />
+            </Carousel.Item>
+            
+          </Carousel>
         </div>
 
         <div className="Content px-3 mt-3 fs-6">
