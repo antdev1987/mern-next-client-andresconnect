@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 
 function Buscador() {
   return (
-    <div className="buscador justify-content-md-center">
+    <div className="buscador">
       <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center align-items-center buscador-boxOptions py-3">
         <Form.Select aria-label="Default select example">
           <option hidden>Pais</option>
