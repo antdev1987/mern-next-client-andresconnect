@@ -1,39 +1,22 @@
-import Dropdown from 'react-bootstrap/Dropdown';
+import Form from 'react-bootstrap/Form';
 
 function Buscador() {
   return (
-    <div className="buscador">
-      <div className="d-flex align-items-center buscador-boxOptions">
-        <Dropdown>
-          <Dropdown.Toggle variant="Danger" id="dropdown-basic">
-            Paises
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown>
-          <Dropdown.Toggle variant="Danger" id="dropdown-basic">
-            Provincias
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown>
-          <Dropdown.Toggle variant="Danger" id="dropdown-basic">
-            Scorts
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+    <div className="buscador justify-content-md-center">
+      <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center align-items-center buscador-boxOptions py-3">
+        <Form.Select aria-label="Default select example">
+          <option hidden>Pais</option>
+          <option value="1">Republica Dominicana</option>
+          <option value="3">Three</option>
+        </Form.Select>
+        <Form.Select aria-label="Default select example">
+          <option hidden>Provincia</option>
+          <option value="1">Santo Domingo</option>
+        </Form.Select>
+        <Form.Select aria-label="Default select example">
+          <option hidden>Scort</option>
+          <option value="1">Femenina</option>
+        </Form.Select>
 
         <label className="buscador-plus d-flex align-items-center pointer">
           <span>
@@ -43,7 +26,9 @@ function Buscador() {
           <input type="checkbox" className="d-none checkBoxOpen" />
         </label>
 
-        <button className='btn'><i className="bi bi-search"></i></button>
+        <button className="btn">
+          <i className="bi bi-search"></i>
+        </button>
       </div>
       <div className="buscador-boxFilters">
         <div>
@@ -61,7 +46,7 @@ function Buscador() {
               </label>
             </div>
 
-            <h3 className='mt-3'>Test</h3>
+            <h3 className="mt-3">Test</h3>
             <div className="ms-3">
               <label className="d-flex align-items-center gap-2">
                 <input type="checkbox" />
