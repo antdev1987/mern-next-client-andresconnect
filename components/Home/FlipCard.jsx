@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+
+import Link from 'next/link';
+
 import { Carousel } from 'react-bootstrap';
 import ReactCardFlip from 'react-card-flip';
+
 
 const FlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -137,7 +141,7 @@ const FlipCard = () => {
           </li>
         </ul>
 
-        <button className="w-100 btn btn-outline-danger">Mostrar Mas</button>
+        <Link href='/scort/5' className="w-100 btn btn-outline-danger">Mostrar Mas</Link>
 
         <i
           className="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"

@@ -53,7 +53,7 @@ const NavBarComp = () => {
             {!session && (
               <Nav.Link as={Link} href="/login">
                 {" "}
-                <i className="bi bi-cart4"></i> Iniciar Sesion
+                <i className="bi bi-person-fill"></i> Iniciar Sesion
               </Nav.Link>
             )}
             {!session && (
