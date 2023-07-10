@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* container */
 .container-default {
   max-width: 1200px;
@@ -71,4 +75,69 @@
   left: 0;
   cursor: pointer;
   transition: scale 300ms ease-in;
+}
+
+/* transition seconds */
+:root {
+  --transition-filter: 300ms;
+}
+
+/* buscador */
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.buscador {
+  display: grid;
+  place-items: center;
+}
+
+.buscador-boxOptions {
+  border: 1px solid black;
+  padding: 0.2rem 1rem;
+  border-radius: 2rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  --webkit-backdrop-filter: blur(20px);
+  flex-direction: column;
+}
+
+@media (min-width: 28.75em) {
+  .buscador-boxOptions {
+    flex-direction: row;
+  }
+}
+
+.buscador-boxFilters {
+  display: grid;
+  grid-template-rows: 0fr;
+
+  max-width: 40rem;
+  width: 100%;
+  margin-top: 1rem;
+
+  transition: grid-template-rows var(--transition-filter) ease-in-out;
+
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  --webkit-backdrop-filter: blur(20px);
+
+  box-shadow: 0 0 10px rgba(90, 89, 89, 0.8);
+  border-radius: 1rem;
+}
+
+.buscador-boxFilters > div {
+  overflow: hidden;
+}
+
+.buscador:has(.checkBoxOpen:checked) .buscador-boxFilters {
+  grid-template-rows: 1fr;
+}
+
+.buscador-plus {
+  border-radius: 0.5rem;
+  /* border: 1px solid black; */
+  transition: transform var(--transition-filter) ease-in-out;
 }
