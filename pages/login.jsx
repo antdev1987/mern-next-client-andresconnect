@@ -1,10 +1,11 @@
-import Layout from '@/components/Layout/Layout';
-import React, { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useSession, getSession } from 'next-auth/react';
-import { signIn } from 'next-auth/react';
-import { GoogleLogin } from '@react-oauth/google';
-import { toast } from 'react-toastify';
+import Layout from "@/components/Layout/Layout";
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useSession, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
+import GoogleIcon from '../public/google.png'
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
 export async function getServerSideProps(context) {
@@ -14,7 +15,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: query.redirect === '/shipping' ? '/shipping' : '/',
+        destination: query.redirect === "/shipping" ? "/shipping" : "/",
         permanent: false,
       },
     };
@@ -44,17 +45,17 @@ const Login = () => {
     const password = passwordRef.current.value;
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(email)) {
-      setWarningText('Email is invalid');
+      setWarningText("Email is invalid");
       return;
     }
     if (email.trim().length === 0 || password.trim().length === 0) {
-      setWarningText('One field is empty');
+      setWarningText("One field is empty");
       return;
     }
-    setWarningText('');
+    setWarningText("");
 
-    const result = await signIn('credentials', {
-      action: 'login',
+    const result = await signIn("credentials", {
+      action: "login",
       email,
       password,
       redirect: false,
@@ -63,26 +64,35 @@ const Login = () => {
     if (result.error) {
       toast.error(result.error);
     } else {
-      router.replace('/');
-      toast.success('User Authenticated');
+      router.replace("/");
+      toast.success("User Authenticated");
     }
   };
 
-  const handleLoginGoogle = async (response) => {
-    //implementation of the function of login with google using the package @react-oauth/google
-
-    // console.log(response)
-
-    try {
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
       setIsLoading(true);
-      const result = await signIn('google', {
-        access_token: response.credential,
+      console.log(tokenResponse.access_token);
+
+      const result = await signIn("credentials", {
+        action: "google",
+        access_token: tokenResponse.access_token,
         redirect: false,
       });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        router.replace("/");
+        toast.success("User Authenticated");
+      }
+    },
+
+    onNonOAuthError: (err) => {
+      console.log(err);
+    },
+  });
+
 
   return (
     <Layout title="Login">
@@ -133,14 +143,16 @@ const Login = () => {
         <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
             {!isLoading ? (
-              <GoogleLogin
-                className=" disabled"
+              <button
+                className="btn btn-outline-danger"
                 clientId={process.env.GOOGLE_ID}
-                onSuccess={handleLoginGoogle}
+                onClick={() => login()}
                 onError={() => {
-                  toast.error('Login Failed');
+                  toast.error("Login Failed");
                 }}
-              />
+              >
+               <i className="bi bi-google"></i> Continuar con Google
+              </button>
             ) : (
               <div>Loading...</div>
             )}

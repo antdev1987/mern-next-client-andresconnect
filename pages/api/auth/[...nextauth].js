@@ -28,6 +28,36 @@ export default NextAuth({
           }
         }
 
+        if(credentials.action === 'google'){
+
+          console.log("in google auth");
+              console.log(credentials.access_token)
+              
+              try {
+                const { data } = await axios.post(
+                  `${process.env.BASE_URL}/user/googlelogin`,
+                  { access_token: credentials.access_token }
+                );
+
+                console.log(data)
+      
+                const user = {
+                  _id: data._id,
+                  email: data.email,
+                  name: data.name,
+                  isAdmin: data.isAdmin,
+                  token: data.token,
+                };
+      
+                return user
+      
+                return true;
+              } catch (error) {
+                console.log(error);
+              }
+
+        }
+
 
         if (credentials.action === "register") {
             console.log('en register')
@@ -58,45 +88,45 @@ export default NextAuth({
       },
     }),
 
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-      usePkce: true,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_ID,
+    //   clientSecret: process.env.GOOGLE_SECRET,
+    //   usePkce: true,
+    // }),
   ],
 
   callbacks: {
-    signIn: async ({ user, account }) => {
+    // signIn: async ({ user, account }) => {
 
-      if(account.provider !== "google"){
-        return true
-      }
+    //   if(account.provider !== "google"){
+    //     return true
+    //   }
 
-      if (account.provider === "google") {
-        console.log("in google auth");
-        console.log(account.access_token)
-        try {
-          const { data } = await axios.post(
-            `${process.env.BASE_URL}/user/googlelogin`,
-            { access_token: account.access_token }
-          );
+    //   if (account.provider === "google") {
+    //     console.log("in google auth");
+    //     console.log(account.access_token)
+    //     try {
+    //       const { data } = await axios.post(
+    //         `${process.env.BASE_URL}/user/googlelogin`,
+    //         { access_token: account.access_token }
+    //       );
 
-          const googleAuthData = {
-            _id: data._id,
-            email: data.email,
-            name: data.name,
-            isAdmin: data.isAdmin,
-            token: data.token,
-          };
+    //       const googleAuthData = {
+    //         _id: data._id,
+    //         email: data.email,
+    //         name: data.name,
+    //         isAdmin: data.isAdmin,
+    //         token: data.token,
+    //       };
 
-          user.user1 = googleAuthData;
+    //       user.user1 = googleAuthData;
 
-          return true;
-        } catch (error) {
-          console.log(error);
-        }
-      }
-     },
+    //       return true;
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }
+    //  },
 
     jwt: async ({ token, user, account, profile }) => {
       // Add user info to JWT payload
