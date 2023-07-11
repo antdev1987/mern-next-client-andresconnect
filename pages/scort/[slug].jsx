@@ -1,26 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import Layout from '@/components/Layout/Layout';
+import Carusel from '@/components/scort/Carusel';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-import { EffectFade, FreeMode, Navigation, Thumbs } from 'swiper/modules';
-
-import LightGallery from 'lightgallery/react';
-
-// import plugins if you need
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
-import 'swiper/css/thumbs';
-
-// import styles
-import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
-import 'lightgallery/css/lg-thumbnail.css';
+import { useEffect, useState } from 'react';
 
 const urls = [
   'https://a0.muscache.com/im/pictures/8100433b-35ec-41c7-a4b1-ca32fb219071.jpg?im_w=1200',
@@ -51,22 +32,8 @@ const urlsMujeres = [
   'https://images.unsplash.com/photo-1657414323167-ae4a5813202b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80',
 ];
 
-import Layout from '@/components/Layout/Layout';
-
 const Scort = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [imgs, setImgs] = useState({ isMujerImgsActive: false, urls: [] });
-
-  const buttonRef = useRef(null);
-  const gallery = useRef(null);
-
-  const handleClick = (i) => {
-    const imagesOpen = gallery.current.querySelectorAll('a')[i];
-    imagesOpen.click();
-
-    // si se quita el console.log deja de funcionar el zoom de imagen
-    console.log();
-  };
 
   const changeImgToMujeres = () => {
     setImgs({ isMujerImgsActive: true, urls: urlsMujeres });
@@ -78,13 +45,11 @@ const Scort = () => {
 
   useEffect(() => {
     setImgs({ ...imgs, urls });
-    setThumbsSwiper(null)
   }, []);
-
   return (
     <Layout title="Scort">
-      <section>
-        <div className="d-flex">
+      <section className="scort">
+        <div className="py-3">
           {imgs.isMujerImgsActive ? (
             <button
               className="btn btn-outline-danger py-1"
@@ -103,64 +68,110 @@ const Scort = () => {
         </div>
         <div className="row">
           <div className="scort-carusel col-12 col-md-8">
-            <Swiper
-              loop={true}
-              // install Swiper modules
-              style={{
-                '--swiper-navigation-color': '#fff',
-                '--swiper-pagination-color': '#fff',
-              }}
-              effect="fade"
-              spaceBetween={10}
-              navigation={true}
-              thumbs={{ swiper: thumbsSwiper }}
-              modules={[EffectFade, FreeMode, Navigation, Thumbs]}
-              className={`scort-swiper ${
-                imgs.isMujerImgsActive ? 'mujerView' : null
-              }`}
-            >
-              {imgs.urls.map((url, idx) => (
-                <SwiperSlide key={idx - 1}>
-                  <img
-                    src={url}
-                    onClick={() => handleClick(idx)}
-                    ref={buttonRef}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            <div ref={gallery} className="d-none">
-              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-                {imgs.urls.map((url, idx) => (
-                  <a data-src={url} key={`${idx + 100}`}>
-                    <img src={url} alt="" loading='lazy' decoding="async" />
-                  </a>
-                ))}
-              </LightGallery>
+            <div className="scort-caruselBox">
+              <Carusel imgs={imgs} />
             </div>
 
-            <Swiper
-              loop={true}
-              onSwiper={setThumbsSwiper}
-              spaceBetween={10}
-              slidesPerView={9}
-              freeMode={true}
-              watchSlidesProgress={true}
-              modules={[FreeMode, Navigation, Thumbs]}
-              className="scort-pagination"
-            >
-              {imgs.urls.map((url, idx) => (
-                <SwiperSlide key={idx + 1}>
-                  <img src={url} decoding="async" />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <div>
+              <h1>Contenido</h1>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Laudantium, tempora. Iure quos architecto officia in perferendis
+                non sed nobis iste nesciunt, blanditiis ullam, ex cumque
+                assumenda voluptate necessitatibus omnis. Nesciunt reiciendis at
+                nisi porro, distinctio reprehenderit possimus sapiente,
+                dignissimos dolorem repudiandae voluptas iure voluptatum? Porro
+                a exercitationem dicta eveniet blanditiis obcaecati iusto iure.
+                Ratione tempora quibusdam cumque incidunt accusantium. Rem
+                perspiciatis commodi perferendis, aliquid aspernatur impedit non
+                obcaecati maxime incidunt sunt, dicta quaerat quia, voluptates
+                doloremque. Hic, natus dolores. Minima consectetur fuga harum
+                voluptatum repellat. Eveniet et eum vel ad velit, nulla
+                voluptate neque at cumque eius amet quod voluptatum incidunt
+                aliquam, obcaecati porro aliquid assumenda illum beatae.
+                Praesentium aspernatur illum doloremque dolore hic a repellat
+                mollitia magnam quos quam optio et similique tempore unde
+                officiis natus culpa consectetur eveniet amet soluta itaque,
+                assumenda illo eius? Perspiciatis nobis voluptatem quaerat,
+                libero tempora ipsam odio cum saepe modi omnis magnam quo
+                suscipit quod perferendis minus molestias beatae magni
+                laudantium blanditiis accusamus laborum. Minima officiis saepe
+                fugit earum tempora autem at rerum ipsum sequi dolorum explicabo
+                pariatur voluptas ex enim debitis officia ipsam dignissimos
+                nulla cum itaque vel, possimus assumenda deleniti. Commodi qui
+                laudantium deleniti tempora iste facere quibusdam iusto error
+                cumque sint repellendus vel itaque quo asperiores numquam quidem
+                expedita, exercitationem quod corrupti praesentium? Reiciendis
+                voluptates aspernatur sed dolorem nam? Non, sit! Soluta dolorem
+                magnam ipsam dolorum atque in minus, quos culpa id quo omnis
+                doloremque provident, hic quaerat molestias quia dicta aperiam
+                itaque. Laborum et quas assumenda obcaecati minima similique
+                neque. Excepturi nam deserunt obcaecati dolorem iusto.
+                Exercitationem ut ratione sequi repellendus totam voluptas
+                deserunt consectetur tenetur eos, incidunt blanditiis natus
+                perferendis, ducimus sint quia nam. Soluta odit ullam,
+                perferendis unde, reiciendis quis tempora vero voluptatum maxime
+                velit libero doloremque aliquam itaque voluptas reprehenderit?
+                Debitis neque pariatur at illum maiores beatae, assumenda magni
+                facere rem atque delectus. Suscipit architecto deleniti
+                voluptates unde quasi omnis ipsam, esse expedita corporis
+                asperiores earum eaque delectus molestias doloremque consectetur
+                accusamus voluptatibus sunt labore rerum molestiae blanditiis
+                in? Accusamus, quidem similique? Aut iusto, enim optio
+                consectetur nulla quo voluptates quam minus! Tempora repellendus
+                eos dignissimos quaerat repellat non atque obcaecati blanditiis
+                eius, facilis rerum illum explicabo, eum quidem minima ullam
+                libero! Aut delectus dolore explicabo praesentium quam velit ex!
+                Ea tenetur dicta eius! Tempore maiores illo beatae esse
+                inventore! Rerum quidem dolorem debitis assumenda quos aliquam
+                similique a unde, error aperiam officia explicabo iure esse eius
+                veniam rem cumque ab quam reprehenderit magni vitae tenetur
+                ullam. Veniam possimus fuga praesentium voluptas maxime corporis
+                nobis, saepe ipsa minus repellat soluta fugiat pariatur officiis
+                mollitia illo amet? Magnam molestias nam quae consequatur libero
+                quis eius amet, rerum numquam et dolore sed, consequuntur
+                repellat reiciendis. Quo reprehenderit, rem, neque hic quas
+                ducimus aliquid itaque quia iure beatae modi sequi commodi magni
+                voluptatem eveniet dolorum veritatis ex ratione! Quos sit
+                corrupti eius explicabo nostrum optio libero nulla ipsam eum
+                quis autem, sequi veritatis molestias culpa! Fugit totam ullam
+                voluptatum perspiciatis exercitationem. Sunt magnam officiis
+                veritatis soluta cum qui est?
+              </p>
+            </div>
           </div>
           <div className="col-12 col-md-4">
-            <div className="scort-cart"></div>
+            <div className="scort-cart py-3 px-2">
+              <p>
+                <span className="fs-4 fw-bold">$107</span> avg per night
+              </p>
+
+              <label className='d-block'>
+                <span>
+                  Empieza:
+                </span>
+                <input
+                  type="date"
+                  name="start"
+                  placeholder="funciona"
+                  className="d-block w-100 scort-cartInput mt-1"
+                />
+              </label>
+
+              <label className='d-block mt-3'>
+                <span>
+                  Termina:
+                </span>
+                <input
+                  type="date"
+                  name="start"
+                  placeholder="funciona"
+                  className="d-block w-100 scort-cartInput mt-1"
+                />
+              </label>
+
+              <button className='btn btn-outline-danger w-100 mt-3'>Reservar</button>
+            </div>
           </div>
         </div>
       </section>
