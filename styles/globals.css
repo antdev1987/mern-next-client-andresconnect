@@ -17,6 +17,8 @@
 
 .flipCard {
   overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .flipCard--front:hover .profile {
