@@ -78,7 +78,7 @@ const Scort = () => {
 
   useEffect(() => {
     setImgs({ ...imgs, urls });
-    setThumbsSwiper(0)
+    setThumbsSwiper(null)
   }, []);
 
   return (
