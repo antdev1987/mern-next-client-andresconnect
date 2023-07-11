@@ -25,7 +25,7 @@
 
 .flipCard--back {
   overflow-y: hidden;
-  backface-visibility: inherit;
+  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,7 +33,7 @@
 
 .flipCard--back .scroll {
   overflow-y: scroll;
-  backface-visibility: inherit;
+  backface-visibility: hidden;
   height: 8rem;
 }
 
