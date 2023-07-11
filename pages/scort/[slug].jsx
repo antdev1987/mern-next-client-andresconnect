@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -30,6 +30,18 @@ const urls = [
   'https://a0.muscache.com/im/pictures/e859f006-5aab-4c58-acd7-15b9987c38b9.jpg?im_w=1200',
 ];
 
+const urlsMujeres = [
+  'https://images.unsplash.com/photo-1593800026384-910bd6ad5c0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80',
+  'https://images.unsplash.com/photo-1594252134118-59777a4657ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=385&q=80',
+  'https://images.unsplash.com/photo-1620840167767-b11a4c8ca62a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+  'https://images.unsplash.com/photo-1608915812295-417351ccf39b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+  'https://images.unsplash.com/photo-1537881483598-4fe07a1ad68a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+  'https://images.unsplash.com/photo-1601474348599-ed21570e9118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+  'https://images.unsplash.com/photo-1612621616353-a0d6396113e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+  'https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80',
+  'https://images.unsplash.com/photo-1657414323167-ae4a5813202b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=386&q=80',
+];
+
 import LightGallery from 'lightgallery/react';
 
 // import styles
@@ -43,21 +55,51 @@ import lgZoom from 'lightgallery/plugins/zoom';
 
 const Scort = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [imgs, setImgs] = useState({ isMujerImgsActive: false, urls: [] });
 
   const buttonRef = useRef(null);
   const gallery = useRef(null);
 
   const handleClick = (i) => {
     const imagesOpen = gallery.current.querySelectorAll('a')[i];
-    imagesOpen.click()
+    imagesOpen.click();
 
-    // si se quita el console.log deja de funcionar
+    // si se quita el console.log deja de funcionar el zoom de imagen
     console.log();
   };
+
+  const changeImgToMujeres = () => {
+    setImgs({ isMujerImgsActive: true, urls: urlsMujeres });
+  };
+
+  const changeImgToHogar = () => {
+    setImgs({ isMujerImgsActive: false, urls: urls });
+  };
+
+  useEffect(() => {
+    setImgs({ ...imgs, urls });
+  }, []);
 
   return (
     <Layout title="Scort">
       <section>
+        <div className="d-flex">
+          {imgs.isMujerImgsActive ? (
+            <button
+              className="btn btn-outline-danger py-1"
+              onClick={changeImgToHogar}
+            >
+              Cambiar a Hogares
+            </button>
+          ) : (
+            <button
+              className="btn btn-outline-danger py-1"
+              onClick={changeImgToMujeres}
+            >
+              Cambiar a Mujeres
+            </button>
+          )}
+        </div>
         <div className="row">
           <div className="scort-carusel col-12 col-md-8">
             <Swiper
@@ -72,14 +114,18 @@ const Scort = () => {
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
               modules={[EffectFade, FreeMode, Navigation, Thumbs]}
-              className="scort-swiper"
+              className={`scort-swiper ${
+                imgs.isMujerImgsActive ? 'mujerView' : null
+              }`}
             >
-              {urls.map((url, idx) => (
+              {imgs.urls.map((url, idx) => (
                 <SwiperSlide key={idx - 1}>
                   <img
                     src={url}
                     onClick={() => handleClick(idx)}
                     ref={buttonRef}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </SwiperSlide>
               ))}
@@ -87,9 +133,9 @@ const Scort = () => {
 
             <div ref={gallery} className="d-none">
               <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-                {urls.map((url, idx) => (
-                  <a data-src={url} key={idx + 100}>
-                    <img src={url} alt="" loading="lazy" decoding="async" />
+                {imgs.urls.map((url, idx) => (
+                  <a data-src={url} key={`${idx + 100}`}>
+                    <img src={url} alt="" decoding="async" />
                   </a>
                 ))}
               </LightGallery>
@@ -105,9 +151,9 @@ const Scort = () => {
               modules={[FreeMode, Navigation, Thumbs]}
               className="scort-pagination"
             >
-              {urls.map((url, idx) => (
+              {imgs.urls.map((url, idx) => (
                 <SwiperSlide key={idx + 1}>
-                  <img src={url} />
+                  <img src={url} loading="lazy" decoding="async" />
                 </SwiperSlide>
               ))}
             </Swiper>

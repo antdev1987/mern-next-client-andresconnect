@@ -157,6 +157,19 @@
   height: 100%;
 }
 
+.scort-swiper .swiper-slide img {
+  cursor: zoom-in;
+}
+
+.scort-swiper.mujerView .swiper-slide {
+  background-color: rgba(76, 52, 52, 0.4);
+  backdrop-filter: blur(30px);
+}
+
+.scort-swiper.mujerView .swiper-slide img {
+  object-fit: contain;
+}
+
 .scort-pagination {
   height: 4rem;
   margin-top: 10px;
@@ -166,6 +179,7 @@
   width: 25%;
   height: 100%;
   opacity: 0.4;
+  cursor: pointer;
 }
 
 .scort-pagination .swiper-slide-thumb-active {
