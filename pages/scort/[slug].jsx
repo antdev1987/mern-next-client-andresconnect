@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -30,8 +30,30 @@ const urls = [
   'https://a0.muscache.com/im/pictures/e859f006-5aab-4c58-acd7-15b9987c38b9.jpg?im_w=1200',
 ];
 
+import LightGallery from 'lightgallery/react';
+
+// import styles
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+
+// import plugins if you need
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+
 const Scort = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const buttonRef = useRef(null);
+  const gallery = useRef(null);
+
+  const handleClick = (i) => {
+    const imagesOpen = gallery.current.querySelectorAll('a')[i];
+    imagesOpen.click()
+
+    // si se quita el console.log deja de funcionar
+    console.log();
+  };
 
   return (
     <Layout title="Scort">
@@ -54,10 +76,24 @@ const Scort = () => {
             >
               {urls.map((url, idx) => (
                 <SwiperSlide key={idx - 1}>
-                  <img src={url} />
+                  <img
+                    src={url}
+                    onClick={() => handleClick(idx)}
+                    ref={buttonRef}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
+
+            <div ref={gallery} className="d-none">
+              <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
+                {urls.map((url, idx) => (
+                  <a data-src={url} key={idx + 100}>
+                    <img src={url} alt="" loading="lazy" decoding="async" />
+                  </a>
+                ))}
+              </LightGallery>
+            </div>
 
             <Swiper
               loop={true}
