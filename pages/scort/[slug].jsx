@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout/Layout';
+import CalenderPick from '@/components/scort/CalenderPick';
 import Carusel from '@/components/scort/Carusel';
 
 import { useEffect, useState } from 'react';
@@ -169,6 +170,8 @@ const Scort = () => {
                   className="d-block w-100 scort-cartInput mt-1"
                 />
               </label>
+
+              <CalenderPick />
 
               <button className='btn btn-outline-danger w-100 mt-3'>Reservar</button>
             </div>
