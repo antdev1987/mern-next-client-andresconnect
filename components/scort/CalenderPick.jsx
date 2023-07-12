@@ -69,6 +69,7 @@ const CalenderPick = () => {
   return (
     <>
       <DateRangePicker
+        readOnly={true}
         anchorDirection="right"
         orientation={orientation}
         // style
