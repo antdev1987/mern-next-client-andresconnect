@@ -1,35 +1,53 @@
-import React, { useState } from "react";
-import "react-dates/initialize";
-import { DateRangePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
-import Moment from "moment";
-import { extendMoment } from "moment-range";
+import React, { useEffect, useState } from 'react';
+import 'react-dates/initialize';
+import { DateRangePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
 
 const CalenderPick = () => {
   const [startDate, setStartDate] = React.useState();
   const [endDate, setEndDate] = React.useState();
   const [focusedInput, setFocusedInput] = React.useState();
+  const [orientation, setOrientation] = useState('vertical');
+
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      const newOrientation = window.matchMedia('(max-width: 700px)').matches
+        ? 'vertical'
+        : 'horizontal';
+      setOrientation(newOrientation);
+    };
+
+    handleOrientationChange(); // Llama a la función al inicio para establecer la orientación inicial
+
+    window.addEventListener('resize', handleOrientationChange);
+
+    return () => {
+      window.removeEventListener('resize', handleOrientationChange);
+    };
+  }, []);
 
   const moment = extendMoment(Moment);
 
   const BAD_DATES = [
     moment.range(
-      moment("2023-07-15", "YYYY-MM-DD"),
-      moment("2023-07-17", "YYYY-MM-DD")
+      moment('2023-07-15', 'YYYY-MM-DD'),
+      moment('2023-07-17', 'YYYY-MM-DD')
     ),
     moment.range(
-      moment("2023-08-10", "YYYY-MM-DD"),
-      moment("2023-08-20", "YYYY-MM-DD")
+      moment('2023-08-10', 'YYYY-MM-DD'),
+      moment('2023-08-20', 'YYYY-MM-DD')
     ),
   ];
 
   const isDayBlocked = (day) => {
-    const today = moment().startOf("day");
+    const today = moment().startOf('day');
     if (day.isBefore(today)) {
       return true; // Block past dates
     }
     for (const range of BAD_DATES) {
-      if (day.isBetween(range.start, range.end, "day", "[]")) {
+      if (day.isBetween(range.start, range.end, 'day', '[]')) {
         return true;
       }
     }
@@ -48,12 +66,12 @@ const CalenderPick = () => {
     return false;
   };
 
-
-  
-
   return (
     <>
       <DateRangePicker
+        anchorDirection="right"
+        orientation={orientation}
+        // style
         startDate={startDate}
         isDayBlocked={isDayBlocked}
         startDateId="start-date"
@@ -64,7 +82,6 @@ const CalenderPick = () => {
           setEndDate(endDate);
         }}
         showClearDates={true}
-  
         focusedInput={focusedInput}
         onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
         isOutsideRange={isEndDateDisabled}
@@ -74,15 +91,6 @@ const CalenderPick = () => {
 };
 
 export default CalenderPick;
-
-
-
-
-
-
-
-
-
 
 //en calencadio esta el bloqueo
 // import React, { useState } from "react";
@@ -98,8 +106,6 @@ export default CalenderPick;
 //   const [focusedInput, setFocusedInput] = React.useState();
 
 //   const moment = extendMoment(Moment);
-
-
 
 //   const BAD_DATES = [
 //     moment.range(
@@ -134,7 +140,6 @@ export default CalenderPick;
 //     return false;
 //   };
 
-
 //   return (
 //     <>
 //       <DateRangePicker
@@ -151,17 +156,12 @@ export default CalenderPick;
 //         onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
 //         isOutsideRange={isEndDateDisabled}
 //       />
-     
+
 //     </>
 //   );
 // };
 
 // export default CalenderPick;
-
-
-
-
-
 
 //con boton esta el bloqueo
 // import React, { useState } from "react";

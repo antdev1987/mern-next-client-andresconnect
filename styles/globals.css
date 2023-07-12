@@ -180,6 +180,7 @@
   top: 1rem;
   box-shadow: 0 0 10px rgb(87, 87, 87);
   border-radius: 15px;
+  z-index: 1;
 }
 
 .DateRangePickerInput  {
@@ -190,14 +191,14 @@
   border-bottom: 1px solid #dc3545 !important;
   color: #dc3545;
 }
-
+/* 
 .DateRangePicker {
   display: flex !important;
 }
 
 .DateRangePicker > div {
   margin: auto;
-}
+} */
 
 .calender {
   z-index: 1 !important;
