@@ -1,3 +1,13 @@
+## las variables de ambiente que se necesita en .env
+
+BASE_URL=
+
+NEXT_PUBLIC_SECRET=
+
+GOOGLE_ID=
+
+GOOGLE_SECRET=
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
