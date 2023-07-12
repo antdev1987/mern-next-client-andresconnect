@@ -1,9 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import Reservar from './Reservar';
 
 const Content = () => {
   return (
     <>
+      <div className="d-md-none d-block">
+        <Reservar />
+      </div>
+
       <p className="fw-light">Toda la casa</p>
       <h1 className="fs-3">
         Purple Jawfish Beach House On Private White Sand Beach in Front of
@@ -25,15 +30,15 @@ const Content = () => {
 
         <ul className="d-flex flex-wrap">
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
         </ul>
@@ -44,15 +49,15 @@ const Content = () => {
 
         <ul className="d-flex flex-wrap">
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
         </ul>
@@ -63,15 +68,15 @@ const Content = () => {
 
         <ul className="d-flex flex-wrap">
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
           <li className="d-flex gap-2 w-50">
-            <i class="bi bi-door-open"></i>
+            <i className="bi bi-door-open"></i>
             <p>1 bedroom</p>
           </li>
         </ul>
@@ -128,25 +133,25 @@ const Content = () => {
 
           <ul className="fs-6 mt-4 ps-0">
             <li className="d-flex gap-2">
-              <i class="bi bi-briefcase"></i>
+              <i className="bi bi-briefcase"></i>
 
               <p>My Work: Artist</p>
             </li>
 
             <li className="d-flex gap-2 mt-1">
-              <i class="bi bi-briefcase"></i>
+              <i className="bi bi-briefcase"></i>
 
               <p>My Work: Artist</p>
             </li>
 
             <li className="d-flex gap-2 mt-1">
-              <i class="bi bi-briefcase"></i>
+              <i className="bi bi-briefcase"></i>
 
               <p>My Work: Artist</p>
             </li>
 
             <li className="d-flex gap-2 mt-1">
-              <i class="bi bi-briefcase"></i>
+              <i className="bi bi-briefcase"></i>
 
               <p>My Work: Artist</p>
             </li>

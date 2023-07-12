@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/Layout';
-import CalenderPick from '@/components/scort/CalenderPick';
 import Carusel from '@/components/scort/Carusel';
 import Content from '@/components/scort/Content';
+import Reservar from '@/components/scort/Reservar';
 
 import { useEffect, useState } from 'react';
 
@@ -78,38 +78,8 @@ const Scort = () => {
               <Content />
             </div>
           </div>
-          <div className="col-12 col-md-4">
-            <div className="scort-cart py-3 px-2">
-              <p>
-                <span className="fs-4 fw-bold">$107</span> avg per night
-              </p>
-
-              <label className="d-block">
-                <span>Empieza:</span>
-                <input
-                  type="date"
-                  name="start"
-                  placeholder="funciona"
-                  className="d-block w-100 scort-cartInput mt-1"
-                />
-              </label>
-
-              <label className="d-block mt-3">
-                <span>Termina:</span>
-                <input
-                  type="date"
-                  name="start"
-                  placeholder="funciona"
-                  className="d-block w-100 scort-cartInput mt-1"
-                />
-              </label>
-
-              <CalenderPick />
-
-              <button className="btn btn-outline-danger w-100 mt-3">
-                Reservar
-              </button>
-            </div>
+          <div className="d-none d-md-block col-md-4">
+            <Reservar />
           </div>
         </div>
       </section>
