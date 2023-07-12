@@ -18,8 +18,8 @@ const FlipCard = () => {
     <ReactCardFlip
       isFlipped={isFlipped}
       containerClassName=""
-      flipSpeedBackToFront={2}
-      flipSpeedFrontToBack={2}
+      // flipSpeedBackToFront={2}
+      // flipSpeedFrontToBack={2}
     >
       <div className="flipCard flipCard--front p-1">
         <div
@@ -38,7 +38,7 @@ const FlipCard = () => {
                 loading="lazy"
                 decoding="async"
                 width={250}
-                height={200}
+                height={300}
                 className="img-house"
               />
             </Carousel.Item>
@@ -50,7 +50,7 @@ const FlipCard = () => {
                 loading="lazy"
                 decoding="async"
                 width={250}
-                height={200}
+                height={300}
                 className="img-house"
               />
             </Carousel.Item>
@@ -62,7 +62,7 @@ const FlipCard = () => {
                 loading="lazy"
                 decoding="async"
                 width={250}
-                height={200}
+                height={300}
                 className="img-house"
               />
             </Carousel.Item>
@@ -105,7 +105,7 @@ const FlipCard = () => {
         </div>
       </div>
 
-      <div className="flipCard flipCard--back p-1">
+      <div className="flipCard flipCard--back p-3 py-4">
         <div className="profile text-center pt-2">
           <img
             src="https://a0.muscache.com/im/pictures/user/User-167065374/original/56a96e89-588b-4406-93d0-57eecdf662c1.jpeg?im_w=240"

@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import Carusel from '@/components/scort/Carusel';
+import Content from '@/components/scort/Content';
 
 import { useEffect, useState } from 'react';
 
@@ -73,71 +74,7 @@ const Scort = () => {
             </div>
 
             <div>
-              <h1>Contenido</h1>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Laudantium, tempora. Iure quos architecto officia in perferendis
-                non sed nobis iste nesciunt, blanditiis ullam, ex cumque
-                assumenda voluptate necessitatibus omnis. Nesciunt reiciendis at
-                nisi porro, distinctio reprehenderit possimus sapiente,
-                dignissimos dolorem repudiandae voluptas iure voluptatum? Porro
-                a exercitationem dicta eveniet blanditiis obcaecati iusto iure.
-                Ratione tempora quibusdam cumque incidunt accusantium. Rem
-                perspiciatis commodi perferendis, aliquid aspernatur impedit non
-                obcaecati maxime incidunt sunt, dicta quaerat quia, voluptates
-                doloremque. Hic, natus dolores. Minima consectetur fuga harum
-                voluptatum repellat. Eveniet et eum vel ad velit, nulla
-                voluptate neque at cumque eius amet quod voluptatum incidunt
-                aliquam, obcaecati porro aliquid assumenda illum beatae.
-                Praesentium aspernatur illum doloremque dolore hic a repellat
-                mollitia magnam quos quam optio et similique tempore unde
-                officiis natus culpa consectetur eveniet amet soluta itaque,
-                assumenda illo eius? Perspiciatis nobis voluptatem quaerat,
-                libero tempora ipsam odio cum saepe modi omnis magnam quo
-                suscipit quod perferendis minus molestias beatae magni
-                laudantium blanditiis accusamus laborum. Minima officiis saepe
-                fugit earum tempora autem at rerum ipsum sequi dolorum explicabo
-                pariatur voluptas ex enim debitis officia ipsam dignissimos
-                nulla cum itaque vel, possimus assumenda deleniti. Commodi qui
-                laudantium deleniti tempora iste facere quibusdam iusto error
-                cumque sint repellendus vel itaque quo asperiores numquam quidem
-                expedita, exercitationem quod corrupti praesentium? Reiciendis
-                voluptates aspernatur sed dolorem nam? Non, sit! Soluta dolorem
-                magnam ipsam dolorum atque in minus, quos culpa id quo omnis
-                doloremque provident, hic quaerat molestias quia dicta aperiam
-                itaque. Laborum et quas assumenda obcaecati minima similique
-                neque. Excepturi nam deserunt obcaecati dolorem iusto.
-                Exercitationem ut ratione sequi repellendus totam voluptas
-                deserunt consectetur tenetur eos, incidunt blanditiis natus
-                perferendis, ducimus sint quia nam. Soluta odit ullam,
-                perferendis unde, reiciendis quis tempora vero voluptatum maxime
-                velit libero doloremque aliquam itaque voluptas reprehenderit?
-                Debitis neque pariatur at illum maiores beatae, assumenda magni
-                facere rem atque delectus. Suscipit architecto deleniti
-                voluptates unde quasi omnis ipsam, esse expedita corporis
-                asperiores earum eaque delectus molestias doloremque consectetur
-                accusamus voluptatibus sunt labore rerum molestiae blanditiis
-                in? Accusamus, quidem similique? Aut iusto, enim optio
-                consectetur nulla quo voluptates quam minus! Tempora repellendus
-                eos dignissimos quaerat repellat non atque obcaecati blanditiis
-                eius, facilis rerum illum explicabo, eum quidem minima ullam
-                libero! Aut delectus dolore explicabo praesentium quam velit ex!
-                Ea tenetur dicta eius! Tempore maiores illo beatae esse
-                inventore! Rerum quidem dolorem debitis assumenda quos aliquam
-                similique a unde, error aperiam officia explicabo iure esse eius
-                veniam rem cumque ab quam reprehenderit magni vitae tenetur
-                ullam. Veniam possimus fuga praesentium voluptas maxime corporis
-                nobis, saepe ipsa minus repellat soluta fugiat pariatur officiis
-                mollitia illo amet? Magnam molestias nam quae consequatur libero
-                quis eius amet, rerum numquam et dolore sed, consequuntur
-                repellat reiciendis. Quo reprehenderit, rem, neque hic quas
-                ducimus aliquid itaque quia iure beatae modi sequi commodi magni
-                voluptatem eveniet dolorum veritatis ex ratione! Quos sit
-                corrupti eius explicabo nostrum optio libero nulla ipsam eum
-                quis autem, sequi veritatis molestias culpa! Fugit totam ullam
-                voluptatum perspiciatis exercitationem. Sunt magnam officiis
-                veritatis soluta cum qui est?
-              </p>
+              <Content />
             </div>
           </div>
           <div className="col-12 col-md-4">
@@ -146,10 +83,8 @@ const Scort = () => {
                 <span className="fs-4 fw-bold">$107</span> avg per night
               </p>
 
-              <label className='d-block'>
-                <span>
-                  Empieza:
-                </span>
+              <label className="d-block">
+                <span>Empieza:</span>
                 <input
                   type="date"
                   name="start"
@@ -158,10 +93,8 @@ const Scort = () => {
                 />
               </label>
 
-              <label className='d-block mt-3'>
-                <span>
-                  Termina:
-                </span>
+              <label className="d-block mt-3">
+                <span>Termina:</span>
                 <input
                   type="date"
                   name="start"
@@ -170,7 +103,9 @@ const Scort = () => {
                 />
               </label>
 
-              <button className='btn btn-outline-danger w-100 mt-3'>Reservar</button>
+              <button className="btn btn-outline-danger w-100 mt-3">
+                Reservar
+              </button>
             </div>
           </div>
         </div>
