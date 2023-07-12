@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession, getSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
-import GoogleIcon from '../public/google.png'
+import SocialGoogleLogin from "@/components/SocialButton/SocialGoogleLogin";
+
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
 export async function getServerSideProps(context) {
@@ -69,29 +70,29 @@ const Login = () => {
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setIsLoading(true);
-      console.log(tokenResponse.access_token);
+  // const login = useGoogleLogin({
+  //   onSuccess: async (tokenResponse) => {
+  //     setIsLoading(true);
+  //     console.log(tokenResponse.access_token);
 
-      const result = await signIn("credentials", {
-        action: "google",
-        access_token: tokenResponse.access_token,
-        redirect: false,
-      });
+  //     const result = await signIn("credentials", {
+  //       action: "google",
+  //       access_token: tokenResponse.access_token,
+  //       redirect: false,
+  //     });
 
-      if (result.error) {
-        toast.error(result.error);
-      } else {
-        router.replace("/");
-        toast.success("User Authenticated");
-      }
-    },
+  //     if (result.error) {
+  //       toast.error(result.error);
+  //     } else {
+  //       router.replace("/");
+  //       toast.success("User Authenticated");
+  //     }
+  //   },
 
-    onNonOAuthError: (err) => {
-      console.log(err);
-    },
-  });
+  //   onNonOAuthError: (err) => {
+  //     console.log(err);
+  //   },
+  // });
 
 
   return (
@@ -140,7 +141,10 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="w-50 py-4 border">
+        <div className=" w-50 mt-4 text-center">or</div>
+        <SocialGoogleLogin />
+
+        {/* <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
             {!isLoading ? (
               <button
@@ -157,7 +161,8 @@ const Login = () => {
               <div>Loading...</div>
             )}
           </div>
-        </div>
+        </div> */}
+
       </section>
     </Layout>
   );

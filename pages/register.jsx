@@ -4,6 +4,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession, getSession } from "next-auth/react";
 // import { GoogleLogin } from "@react-oauth/google";
+import SocialGoogleLogin from "@/components/SocialButton/SocialGoogleLogin";
+
 import { toast } from "react-toastify";
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
@@ -137,6 +139,10 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        <div className=" w-50 mt-4 text-center">or</div>
+
+        <SocialGoogleLogin />
 
         {/* <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
