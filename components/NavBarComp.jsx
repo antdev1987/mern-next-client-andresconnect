@@ -62,23 +62,30 @@ const NavBarComp = () => {
               </Nav.Link>
             )}
 
+            {/* esto pasa cuando estas logeado */}
             {session && (
-              <NavDropdown
-                title={session.user.name}
-                // id="navbarScrollingDropdown"
-                className='my-auto'
-                align="end"
-              >
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => signOut()}>
-                  {/* <button onClick={()=>signOut()}>log out</button> */}
-                  Log out
-                </NavDropdown.Item>
-              </NavDropdown>
+              <>
+                <Nav.Link as={Link} href="/perfil-form-1">
+                  <i className="bi bi-shop"></i> Publicar tu Espacio
+                </Nav.Link>
+
+                <NavDropdown
+                  title={session.user.name}
+                  // id="navbarScrollingDropdown"
+                  className="my-auto"
+                  align="end"
+                >
+                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={() => signOut()}>
+                    {/* <button onClick={()=>signOut()}>log out</button> */}
+                    Log out
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>
