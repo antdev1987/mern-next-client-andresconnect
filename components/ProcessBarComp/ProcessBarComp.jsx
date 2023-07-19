@@ -29,14 +29,14 @@ const ProcessBarComp = ({step}) => {
           <div
             className={`${step > 3 && ' border-bottom border-3 border-warning'} col-1 text-muted`}
           >
-           <Link className=' text-decoration-none' href='/perfil-form-3'>Tipo</Link>
+           <Link className=' text-decoration-none' href='/perfil-form-3'>Ubicacion</Link>
           </div>
 
 
           <div
             className={`${step > 4 && ' border-bottom border-3 border-warning'} col-2 text-muted`}
           >
-           <Link className=' text-decoration-none' href='/perfil-form-4'>Ubicacion</Link>
+           <Link className=' text-decoration-none' href='/perfil-form-4'>------</Link>
           </div>
 
           <div

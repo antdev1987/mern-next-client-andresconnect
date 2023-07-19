@@ -162,7 +162,9 @@ const Content = () => {
       <div className="mt-4">
         <h3 className="mb-3">La Ubicacion</h3>
 
-        <div className="bg-danger w-100" style={{ height: '300px' }}></div>
+        <div className="bg-danger w-100" style={{ height: '300px' }}>
+        {/* <iframe className='w-100 h-100' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.750716271832!2d-87.8006397940945!3d15.389981209987075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f66158c3115bc69%3A0xf59f7b891556c52e!2sColonia%20Bendeck%2C%20El%20Progreso!5e0!3m2!1ses-419!2shn!4v1689728974832!5m2!1ses-419!2shn"   allowFullScreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
+        </div>
       </div>
 
       <div className="mt-4">
