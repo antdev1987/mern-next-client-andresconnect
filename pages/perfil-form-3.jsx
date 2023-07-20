@@ -9,6 +9,12 @@ const PerfilForm3 = () => {
     e.preventDefault();
     router.push("/perfil-form-4");
   };
+
+  const chooseOnMap = () => {
+    console.log('/mapScreen')
+    router.push("/mapScreen");
+  };
+
   return (
     <Layout title="informacion de lugar">
       <div className=" d-none d-sm-block">
@@ -95,8 +101,9 @@ const PerfilForm3 = () => {
           />
         </div>
 
-
-
+        <button type="button" className="btn btn-primary" onClick={chooseOnMap}>
+          map
+        </button>
 
         <div className="col-12">
           <button type="submit" className="btn btn-primary">
