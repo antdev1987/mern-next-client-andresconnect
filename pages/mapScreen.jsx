@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 import {
   LoadScript,
   GoogleMap,
@@ -15,6 +16,8 @@ const MapScreen = () => {
   const [center, setCenter] = useState(defaultLocation);
   const [location, setLocation] = useState(center);
 
+  const router = useRouter()
+
   const mapRef = useRef(null);
   const placeRef = useRef(null);
   const markerRef = useRef(null);
@@ -23,7 +26,7 @@ const MapScreen = () => {
     setGoogleApiKey(process.env.GOOGLE_API_KEY);
     getUserCurrentLocation();
   }, []);
-  console.log(googleApiKey)
+  
 
   const onLoad = (map) => {
     mapRef.current = map;
@@ -56,6 +59,7 @@ const MapScreen = () => {
     if(result){
         console.log(location)
         alert('direcion guardada exitosamente')
+        router.push('/perfil-form-3')
     }else{
         alert('presiona Ok para intenta de nuevo')
     }
@@ -75,7 +79,6 @@ const MapScreen = () => {
     } else {
 
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position)
         setCenter({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
