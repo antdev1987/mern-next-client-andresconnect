@@ -1,18 +1,63 @@
-import Layout from "@/components/Layout/Layout";
-import ProcessBarComp from "@/components/ProcessBarComp/ProcessBarComp";
-import { useRouter } from "next/router";
+import Layout from '@/components/Layout/Layout';
+import ProcessBarComp from '@/components/ProcessBarComp/ProcessBarComp';
+import { context } from '@/context/ContextProvider';
+import { useRouter } from 'next/router';
+
+import { useContext, useEffect, useState } from 'react';
+
+const initialState = {
+  calle: '',
+  numero: '',
+  piso: '',
+  barrio: '',
+  sector: '',
+  municipio: '',
+  provincia: '',
+};
 
 const PerfilForm3 = () => {
   const router = useRouter();
 
+  const [canContinue, setCanContinue] = useState(false);
+  const [inputValue, setInputValue] = useState(initialState);
+
+  const { state, dispatch } = useContext(context);
+
+  const setValues = (e) =>
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    console.log(state.direccionInfo);
+    setInputValue(state.direccionInfo || initialState);
+  }, []);
+
+  useEffect(() => {
+    const valores = Object.entries(inputValue);
+    console.log(valores);
+
+    for (const valor of valores) {
+      if (
+        valor[1] === '' ||// Verificar si es una cadena vacía
+        !valor[1].trim()
+      ) {
+        setCanContinue(false);
+        return;
+      }
+    }
+    setCanContinue(true);
+  }, [inputValue]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push("/perfil-form-4");
+
+    dispatch({ type: 'DIRECCION_INFO', payload: { ...inputValue } });
+
+    router.push('/perfil-form-4');
   };
 
   const chooseOnMap = () => {
-    console.log('/mapScreen')
-    router.push("/mapScreen");
+    console.log('/mapScreen');
+    router.push('/mapScreen');
   };
 
   return (
@@ -29,9 +74,12 @@ const PerfilForm3 = () => {
             CALLE
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTCALLE"
+            name="calle"
+            value={inputValue.calle}
           />
         </div>
 
@@ -40,64 +88,82 @@ const PerfilForm3 = () => {
             NUMERO
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTNUMERO"
+            name="numero"
+            value={inputValue.numero}
           />
         </div>
 
         <div className="col-md-4">
           <label htmlFor="INPUTSECTOR" className="form-label">
-            SECTOR
+            PISO
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTSECTOR"
+            name="piso"
+            value={inputValue.piso}
           />
         </div>
 
         <div className="col-md-4">
           <label htmlFor="INPUTPISO" className="form-label">
-            PISO
+            BARRIO, URBANIZACION, RESIDENCIAL
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTPISO"
+            name="barrio"
+            value={inputValue.barrio}
           />
         </div>
 
         <div className="col-md-4">
           <label htmlFor="INPUTMUNICIPIO" className="form-label">
-            MUNICIPIO
+            SECTOR
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTMUNICIPIO"
+            name="sector"
+            value={inputValue.sector}
           />
         </div>
 
         <div className="col-md-4">
           <label htmlFor="INPUTPROVINCIA" className="form-label">
-            PROVINCIA
+            MUNICIPIO
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTPROVINCIA"
+            name="municipio"
+            value={inputValue.municipio}
           />
         </div>
 
         <div className="col-md-4">
           <label htmlFor="INPUTURREBA" className="form-label">
-            URBANIZACION, RESIDENCIAL O BARRIO
+            PROVINCIA
           </label>
           <input
+            onChange={setValues}
             type="text"
             className="form-control border-dark"
             id="INPUTURREBA"
+            name="provincia"
+            value={inputValue.provincia}
           />
         </div>
 
@@ -106,9 +172,11 @@ const PerfilForm3 = () => {
         </button>
 
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">
-            Salvar y Continuar
-          </button>
+          {canContinue && (
+            <button type="submit" className="btn btn-primary">
+              Salvar y Continuar
+            </button>
+          )}
         </div>
       </form>
     </Layout>

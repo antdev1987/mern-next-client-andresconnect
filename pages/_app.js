@@ -1,25 +1,23 @@
-
-import { SessionProvider, useSession } from "next-auth/react";
-import {  useRouter } from "next/router";
-import Layout from "@/components/Layout/Layout";
-import { ToastContainer,toast } from "react-toastify";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-
+import { SessionProvider, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import Layout from '@/components/Layout/Layout';
+import { ToastContainer, toast } from 'react-toastify';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import '@/styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { ContextProvider } from '@/context/ContextProvider';
 
-export default function App({ 
-  Component, 
-  pageProps:{session, ...pageProps}
- }) {
-
-
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <GoogleOAuthProvider clientId={`${process.env.GOOGLE_ID}`}>
-      <SessionProvider session={session}>
-        {/* <StoreProvider> */}
+    <ContextProvider>
+      <GoogleOAuthProvider clientId={`${process.env.GOOGLE_ID}`}>
+        <SessionProvider session={session}>
+          {/* <StoreProvider> */}
           <ToastContainer />
 
           {Component.auth ? (
@@ -29,12 +27,12 @@ export default function App({
           ) : (
             <Component {...pageProps} />
           )}
-        {/* </StoreProvider> */}
-      </SessionProvider>
-     </GoogleOAuthProvider>
+          {/* </StoreProvider> */}
+        </SessionProvider>
+      </GoogleOAuthProvider>
+    </ContextProvider>
   );
 }
-
 
 //this is for protected routes
 function Auth({ children, adminOnly }) {
@@ -44,12 +42,12 @@ function Auth({ children, adminOnly }) {
   const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
-      toast.error("you are not Logged in");
-      router.push("/login");
+      toast.error('you are not Logged in');
+      router.push('/login');
     },
   });
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return (
       <Layout>
         <div>Loading</div>
@@ -58,8 +56,8 @@ function Auth({ children, adminOnly }) {
   }
 
   if (adminOnly && !session.user.isAdmin) {
-    toast.warning("you are not admin");
-    router.push("/cart");
+    toast.warning('you are not admin');
+    router.push('/cart');
   }
 
   return children;

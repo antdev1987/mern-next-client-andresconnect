@@ -1,19 +1,53 @@
-import Layout from "@/components/Layout/Layout";
-import ProcessBarComp from "@/components/ProcessBarComp/ProcessBarComp";
-import { useRouter } from "next/router";
+import Layout from '@/components/Layout/Layout';
+import ProcessBarComp from '@/components/ProcessBarComp/ProcessBarComp';
+import { context } from '@/context/ContextProvider';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
+
+const initialState = {
+  estadoPropiedad: '',
+  tipoPropiedad: '',
+};
 
 const PerfilForm2 = () => {
+  const router = useRouter();
+  const [canContinue, setCanContinue] = useState(false);
+  const [inputValue, setInputValue] = useState(initialState);
 
-const router = useRouter()
+  const { state, dispatch } = useContext(context);
 
+  const setValues = (e) =>
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    console.log(state.propiedadInfo);
+    setInputValue(state.propiedadInfo || initialState);
+  }, []);
+
+  useEffect(() => {
+    const valores = Object.entries(inputValue);
+
+    for (const valor of valores) {
+      if (
+        valor[1] === '' || // Verificar si es una cadena vacía
+        !valor[1].trim()
+      ) {
+        setCanContinue(false);
+        return;
+      }
+    }
+    setCanContinue(true);
+  }, [inputValue]);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    router.push('/perfil-form-3')
+    dispatch({ type: 'PROPIEDAD_INFO', payload: { ...inputValue } });
 
+    console.log(inputValue);
+    router.push('/perfil-form-3');
   };
-  
+
   return (
     <Layout title="informacion de propiedad">
       <div className=" d-none d-sm-block">
@@ -30,9 +64,11 @@ const router = useRouter()
               <input
                 className="form-check-input"
                 type="radio"
-                name="propiedad"
+                name="estadoPropiedad"
                 id="ALQUILADORADIO"
-                value="option1"
+                value="alquilado"
+                onChange={setValues}
+                checked={inputValue.estadoPropiedad === 'alquilado'}
               />
               <label className="form-check-label" htmlFor="ALQUILADORADIO">
                 ALQUILADO
@@ -42,9 +78,11 @@ const router = useRouter()
               <input
                 className="form-check-input"
                 type="radio"
-                name="propiedad"
+                name="estadoPropiedad"
                 id="PROPIORADIO"
-                value="option2"
+                value="propio"
+                onChange={setValues}
+                checked={inputValue.estadoPropiedad === 'propio'}
               />
               <label className="form-check-label" htmlFor="PROPIORADIO">
                 PROPIO
@@ -54,10 +92,12 @@ const router = useRouter()
               <input
                 className="form-check-input"
                 type="radio"
-                name="propiedad"
+                name="estadoPropiedad"
                 id="COMPANERORADIO"
-                value="option3"
+                value="companero de casa"
                 disabled
+                onChange={setValues}
+                checked={inputValue.estadoPropiedad === 'companero de casa'}
               />
               <label className="form-check-label" htmlFor="COMPANERORADIO">
                 COMPANERO DE CASA
@@ -74,9 +114,11 @@ const router = useRouter()
             <input
               className="form-check-input"
               type="radio"
-              name="gridRadios"
+              name="tipoPropiedad"
               id="CASARADIO"
-              value="option1"
+              value="casa"
+              onChange={setValues}
+              checked={inputValue.tipoPropiedad === 'casa'}
             />
             <label className="form-check-label" htmlFor="CASARADIO">
               CASA
@@ -87,9 +129,11 @@ const router = useRouter()
             <input
               className="form-check-input"
               type="radio"
-              name="gridRadios"
+              name="tipoPropiedad"
               id="VILLARADIO"
-              value="option2"
+              value="villa"
+              onChange={setValues}
+              checked={inputValue.tipoPropiedad === 'villa'}
             />
             <label className="form-check-label" htmlFor="VILLARADIO">
               VILLA
@@ -100,9 +144,11 @@ const router = useRouter()
             <input
               className="form-check-input"
               type="radio"
-              name="gridRadios"
+              name="tipoPropiedad"
               id="APARTAMENTORADIO"
-              value="option3"
+              value="apartamento"
+              onChange={setValues}
+              checked={inputValue.tipoPropiedad === 'apartamento'}
             />
             <label className="form-check-label" htmlFor="APARTAMENTORADIO">
               APARTAMENTO
@@ -113,9 +159,11 @@ const router = useRouter()
             <input
               className="form-check-input"
               type="radio"
-              name="gridRadios"
+              name="tipoPropiedad"
               id="APARAESTUDIORADIO"
-              value="option4"
+              value="aparta-estudio"
+              onChange={setValues}
+              checked={inputValue.tipoPropiedad === 'aparta-estudio'}
             />
             <label className="form-check-label" htmlFor="APARAESTUDIORADIO">
               APARTA-ESTUDIO
@@ -126,9 +174,11 @@ const router = useRouter()
             <input
               className="form-check-input"
               type="radio"
-              name="gridRadios"
+              name="tipoPropiedad"
               id="OTRORADIO"
-              value="option5"
+              value="otros"
+              onChange={setValues}
+              checked={inputValue.tipoPropiedad === 'otros'}
             />
             <label className="form-check-label" htmlFor="OTRORADIO">
               OTROS
@@ -137,9 +187,11 @@ const router = useRouter()
         </div>
 
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">
-            Salvar y Continuar
-          </button>
+          {canContinue && (
+            <button type="submit" className="btn btn-primary">
+              Salvar y Continuar
+            </button>
+          )}
         </div>
       </form>
     </Layout>
