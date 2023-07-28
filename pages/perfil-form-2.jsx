@@ -4,24 +4,25 @@ import { context } from '@/context/ContextProvider';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 
-const initialState = {
-  estadoPropiedad: '',
-  tipoPropiedad: '',
-};
-
 const PerfilForm2 = () => {
-  const router = useRouter();
-  const [canContinue, setCanContinue] = useState(false);
-  const [inputValue, setInputValue] = useState(initialState);
-
   const { state, dispatch } = useContext(context);
+
+  const router = useRouter();
+
+  const [canContinue, setCanContinue] = useState(false);
+
+  const [inputValue, setInputValue] = useState({
+    estadoPropiedad: state.propiedadInfo?.estadoPropiedad || '',
+    tipoPropiedad: state.propiedadInfo?.tipoPropiedad || '',
+  });
 
   const setValues = (e) =>
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
 
   useEffect(() => {
-    console.log(state.propiedadInfo);
-    setInputValue(state.propiedadInfo || initialState);
+    if (!state.personalInfo.nombre) {
+      router.push('/perfil-form-1');
+    }
   }, []);
 
   useEffect(() => {
@@ -50,9 +51,7 @@ const PerfilForm2 = () => {
 
   return (
     <Layout title="informacion de propiedad">
-      <div className=" d-none d-sm-block">
-        <ProcessBarComp step="3" />
-      </div>
+      <ProcessBarComp step="3" />
 
       <h2 className="py-4">INFORMACION DE LA PROPIEDAD</h2>
 

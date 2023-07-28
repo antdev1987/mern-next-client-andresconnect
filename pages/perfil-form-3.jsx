@@ -5,30 +5,30 @@ import { useRouter } from 'next/router';
 
 import { useContext, useEffect, useState } from 'react';
 
-const initialState = {
-  calle: '',
-  numero: '',
-  piso: '',
-  barrio: '',
-  sector: '',
-  municipio: '',
-  provincia: '',
-};
-
 const PerfilForm3 = () => {
+  const { state, dispatch } = useContext(context);
+
   const router = useRouter();
 
   const [canContinue, setCanContinue] = useState(false);
-  const [inputValue, setInputValue] = useState(initialState);
 
-  const { state, dispatch } = useContext(context);
+  const [inputValue, setInputValue] = useState({
+    calle: state.direccionInfo?.calle || '',
+    numero: state.direccionInfo?.numero || '',
+    piso: state.direccionInfo?.piso || '',
+    barrio: state.direccionInfo?.barrio || '',
+    sector: state.direccionInfo?.sector || '',
+    municipio: state.direccionInfo?.municipio || '',
+    provincia: state.direccionInfo?.provincia || '',
+  });
 
   const setValues = (e) =>
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
 
   useEffect(() => {
-    console.log(state.direccionInfo);
-    setInputValue(state.direccionInfo || initialState);
+    if (!state.propiedadInfo?.estadoPropiedad) {
+      router.push('/perfil-form-2');
+    }
   }, []);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const PerfilForm3 = () => {
 
     for (const valor of valores) {
       if (
-        valor[1] === '' ||// Verificar si es una cadena vacía
+        valor[1] === '' || // Verificar si es una cadena vacía
         !valor[1].trim()
       ) {
         setCanContinue(false);
@@ -56,7 +56,6 @@ const PerfilForm3 = () => {
   };
 
   const chooseOnMap = () => {
-    console.log('/mapScreen');
     router.push('/mapScreen');
   };
 

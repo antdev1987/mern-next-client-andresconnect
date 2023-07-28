@@ -6,38 +6,32 @@ import ProcessBarComp from '@/components/ProcessBarComp/ProcessBarComp';
 import { useRouter } from 'next/router';
 import { context } from '@/context/ContextProvider';
 
-const initialState = {
-  nombre: '',
-  apellidos: '',
-  genero: '',
-  nacionalidad: '',
-  tel: '',
-  edad: '',
-  fecha: '',
-};
-
 const PerfilForm1 = () => {
-  const [canContinue, setCanContinue] = useState(false);
-  const [inputValue, setInputValue] = useState(initialState);
-
   const { state, dispatch } = useContext(context);
 
   const router = useRouter();
 
+  const [canContinue, setCanContinue] = useState(false);
+
+  const [inputValue, setInputValue] = useState({
+    nombre: state.personalInfo?.nombre || '',
+    apellidos: state.personalInfo?.apellidos || '',
+    genero: state.personalInfo?.genero || '',
+    nacionalidad: state.personalInfo?.nacionalidad || '',
+    tel: state.personalInfo?.tel || '',
+    edad: state.personalInfo?.edad || '',
+    fecha: state.personalInfo?.fecha || '',
+  });
+
   const setValues = (e) =>
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
-
-  useEffect(() => {
-    // console.log(state.personalInfo);
-    setInputValue(state.personalInfo || initialState);
-  }, []);
 
   useEffect(() => {
     const valores = Object?.entries(inputValue);
 
     for (const valor of valores) {
       if (
-        valor[1] === '' ||// Verificar si es una cadena vacía
+        valor[1] === '' || // Verificar si es una cadena vacía
         !valor[1].trim()
       ) {
         setCanContinue(false);
@@ -56,9 +50,7 @@ const PerfilForm1 = () => {
   };
   return (
     <Layout title="informacion personal">
-      <div className=" d-none d-sm-block">
-        <ProcessBarComp step="2" />
-      </div>
+      <ProcessBarComp step="2" />
 
       <h2 className="py-4">INFORMACION PERSONAL</h2>
 
