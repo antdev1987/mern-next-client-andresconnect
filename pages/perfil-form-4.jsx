@@ -6,6 +6,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
+import { useSession } from "next-auth/react"
 
 const initialState = {
   termino_condiciones: false,
@@ -18,6 +19,15 @@ const initialState = {
 };
 
 const PerfilForm4 = () => {
+  const { data: session, update: sessionUpdate, status } = useSession()
+
+
+
+  // sessionUpdate()
+
+  // console.log(status)
+  console.log(session)
+
   const { state, dispatch } = useContext(context);
 
   const router = useRouter();
@@ -90,12 +100,18 @@ const PerfilForm4 = () => {
     // formData.append('', JSON.stringify(state));
     // console.log(inputValue);
     try {
+      const config = { headers: { Authorization: `Bearer ${session.user.token}` } }
       const data = await axios.post(
         'http://localhost:4000/api/user/userverification/',
-        formData
+        formData,
+        config
       );
       console.log(data);
       dispatch({ type: 'LIMPIAR_INFO' });
+      // update({isVerificationProcess:true})
+      sessionUpdate()
+
+      // console.log(update)
       // router.push('/perfil-form-4');
     } catch (error) {
       console.log(error);

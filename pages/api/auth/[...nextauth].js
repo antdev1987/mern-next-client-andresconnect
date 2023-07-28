@@ -9,9 +9,8 @@ export default NextAuth({
   providers: [
     CredentialProvider({
       async authorize(credentials, req) {
-
         if (credentials.action === "login") {
-            console.log('aqui aqui')
+          console.log("aqui aqui");
           try {
             const { data: user } = await axios.post(
               `${process.env.BASE_URL}/user/login`,
@@ -28,63 +27,58 @@ export default NextAuth({
           }
         }
 
-        if(credentials.action === 'google'){
-
+        if (credentials.action === "google") {
           console.log("in google auth");
-              console.log(credentials.access_token)
-              
-              try {
-                const { data } = await axios.post(
-                  `${process.env.BASE_URL}/user/googlelogin`,
-                  { access_token: credentials.access_token }
-                );
+          console.log(credentials.access_token);
 
-                console.log(data)
-      
-                const user = {
-                  _id: data._id,
-                  email: data.email,
-                  name: data.name,
-                  isAdmin: data.isAdmin,
-                  token: data.token,
-                };
-      
-                return user
-      
-                return true;
-              } catch (error) {
-                console.log(error);
-              }
+          try {
+            const { data } = await axios.post(
+              `${process.env.BASE_URL}/user/googlelogin`,
+              { access_token: credentials.access_token }
+            );
 
+            console.log(data);
+
+            const user = {
+              _id: data._id,
+              isVerificationProcess: data.isVerificationProcess,
+              email: data.email,
+              name: data.name,
+              isAdmin: data.isAdmin,
+              token: data.token,
+            };
+
+            return user;
+
+            return true;
+          } catch (error) {
+            console.log(error);
+          }
         }
 
-
         if (credentials.action === "register") {
-            console.log('en register')
+          console.log("en register");
 
-            try {
-              const { data: user } = await axios.post(
-                `${process.env.BASE_URL}/user/register`,
-                credentials
-              );
+          try {
+            const { data: user } = await axios.post(
+              `${process.env.BASE_URL}/user/register`,
+              credentials
+            );
 
+            console.log(user);
+            // const { token } = user;
 
+            // Verify and decode the token
+            // const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-              console.log(user)
-              // const { token } = user;
-  
-              // Verify and decode the token
-              // const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+            console.log(user.userAuthenticated);
 
-              console.log(user.userAuthenticated)
-  
-              return user.userAuthenticated
-            } catch (error) {
-                console.log('aqui')
-              throw new Error(getError(error));
-            }
+            return user.userAuthenticated;
+          } catch (error) {
+            console.log("aqui");
+            throw new Error(getError(error));
           }
-
+        }
       },
     }),
 
@@ -128,16 +122,22 @@ export default NextAuth({
     //   }
     //  },
 
-    jwt: async ({ token, user, account, profile }) => {
+    jwt: async ({ token, user, account, profile, trigger, session }) => {
       // Add user info to JWT payload
 
       if (account?.provider === "credentials") {
         token.user = user;
       }
 
-        if (account?.provider === 'google') {
-          token.user = user.user1;
-        }
+      if (account?.provider === "google") {
+        token.user = user.user1;
+      }
+
+      if (trigger === "update") {
+        console.log(session);
+
+        token.user.isVerificationProcess = true;
+      }
       return token;
     },
 
