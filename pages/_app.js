@@ -8,6 +8,7 @@ import '@/styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ContextProvider } from '@/context/ContextProvider';
+import SpinnerCustom from '@/components/SpinnerCustom/SpinnerCustom';
 
 export default function App({
   Component,
@@ -15,6 +16,7 @@ export default function App({
 }) {
   return (
     <ContextProvider>
+      <SpinnerCustom />
       <GoogleOAuthProvider clientId={`${process.env.GOOGLE_ID}`}>
         <SessionProvider session={session}>
           {/* <StoreProvider> */}

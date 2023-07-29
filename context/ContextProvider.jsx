@@ -15,6 +15,7 @@ const initialState = {
     (typeof window !== 'undefined' &&
       JSON.parse(localStorage.getItem('direccionInfo'))) ||
     {},
+  isLoading: false,
 };
 
 const reducer = (state, action) => {
@@ -41,6 +42,14 @@ const reducer = (state, action) => {
         propiedadInfo: {},
         personalInfo: {},
       };
+
+    case 'isLoading_true':
+      console.log(action.payload, 'desde loading true');
+      return { ...state, isLoading: true };
+
+    case 'isLoading_false':
+      console.log(action.payload, 'desde loading falso');
+      return { ...state, isLoading: false };
     default:
       return state;
   }

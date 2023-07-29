@@ -1,10 +1,27 @@
 import Layout from '@/components/Layout/Layout';
 import ProcessBarComp from '@/components/ProcessBarComp/ProcessBarComp';
 import { context } from '@/context/ContextProvider';
+import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 
-const PerfilForm2 = () => {
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  console.log(session, 'sever side props');
+  if (session.user.isVerificationProcess) {
+    return {
+      redirect: {
+        destination: '/perfil',
+        permanent: false,
+      },
+    };
+  }
+  return { props: session };
+}
+
+const PerfilForm2 = (props) => {
+  console.log(props, 'recargando');
+  // const { data: session } = useSession();
   const { state, dispatch } = useContext(context);
 
   const router = useRouter();
@@ -23,7 +40,7 @@ const PerfilForm2 = () => {
     if (!state.personalInfo.nombre) {
       router.push('/perfil-form-1');
     }
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     const valores = Object.entries(inputValue);

@@ -1,11 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-
 import Layout from '@/components/Layout/Layout';
 import ProcessBarComp from '@/components/ProcessBarComp/ProcessBarComp';
-
-import { useRouter } from 'next/router';
 import { context } from '@/context/ContextProvider';
+import { useSession, getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  console.log(session, 'sever side props');
+  if (session.user.isVerificationProcess) {
+    return {
+      redirect: {
+        destination: '/perfil',
+        permanent: false,
+      },
+    };
+  }
+  return { props: session };
+}
 const PerfilForm1 = () => {
   const { state, dispatch } = useContext(context);
 

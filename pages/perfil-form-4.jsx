@@ -6,7 +6,22 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
-import { useSession } from "next-auth/react"
+import { useSession, getSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  console.log(session, 'sever side props');
+  if (session.user.isVerificationProcess) {
+    return {
+      redirect: {
+        destination: '/perfil',
+        permanent: false,
+      },
+    };
+  }
+  return { props: session };
+}
 
 const initialState = {
   termino_condiciones: false,
@@ -19,14 +34,12 @@ const initialState = {
 };
 
 const PerfilForm4 = () => {
-  const { data: session, update: sessionUpdate, status } = useSession()
-
-
+  const { data: session, update: sessionUpdate, status } = useSession();
 
   // sessionUpdate()
 
   // console.log(status)
-  console.log(session)
+  // console.log(session)
 
   const { state, dispatch } = useContext(context);
 
@@ -82,6 +95,7 @@ const PerfilForm4 = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: 'isLoading_true' });
 
     const formInfo = {
       personalInfo: state.personalInfo,
@@ -100,7 +114,9 @@ const PerfilForm4 = () => {
     // formData.append('', JSON.stringify(state));
     // console.log(inputValue);
     try {
-      const config = { headers: { Authorization: `Bearer ${session.user.token}` } }
+      const config = {
+        headers: { Authorization: `Bearer ${session.user.token}` },
+      };
       const data = await axios.post(
         'http://localhost:4000/api/user/userverification/',
         formData,
@@ -109,14 +125,16 @@ const PerfilForm4 = () => {
       console.log(data);
       dispatch({ type: 'LIMPIAR_INFO' });
       // update({isVerificationProcess:true})
-      sessionUpdate()
+      await sessionUpdate();
+      dispatch({ type: 'isLoading_false' });
+      toast.success("Formulari enviado exitosamente");
 
       // console.log(update)
-      // router.push('/perfil-form-4');
+      router.push('/perfil');
     } catch (error) {
       console.log(error);
-      getError(error.message)
-      console.log(getError(error))
+      getError(error.message);
+      console.log(getError(error));
     }
   };
   return (

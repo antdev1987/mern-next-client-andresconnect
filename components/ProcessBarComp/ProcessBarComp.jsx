@@ -1,7 +1,24 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const ProcessBarComp = ({ step }) => {
+  const { data: session } = useSession();
+
+  const router = useRouter();
+
+  // console.log(session?.user);
+
+  // useEffect(() => {
+  //   console.log(session);
+  //   if (session?.user?.isVerificationProcess) {
+  //     console.log('entre');
+  //     router.push('/perfil');
+  //   }
+  //   console.log('verificando loop');
+  // }, [session]);
+
   return (
     <div className="row my-4 mx-auto text-center">
       <div
