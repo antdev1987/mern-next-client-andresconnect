@@ -56,11 +56,12 @@ const NavBarComp = () => {
                 <i className="bi bi-person-fill"></i> Iniciar Sesion
               </Nav.Link>
             )}
-            {!session && (
+
+            {/* {!session && (
               <Nav.Link as={Link} href="/register">
                 <i className="bi bi-person-fill-lock"></i> Registrarse
               </Nav.Link>
-            )}
+            )} */}
 
             {/* esto pasa cuando estas logeado */}
             {session && (

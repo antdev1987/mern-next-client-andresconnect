@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session, 'sever side props');
-  if (session.user.isVerificationProcess) {
+  if (session?.user.isVerificationProcess) {
     return {
       redirect: {
         destination: '/perfil',
@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  return { props: session };
+  return { props: {} };
 }
 
 const PerfilForm3 = () => {
@@ -180,9 +180,9 @@ const PerfilForm3 = () => {
           />
         </div>
 
-        <button type="button" className="btn btn-primary" onClick={chooseOnMap}>
+        {/* <button type="button" className="btn btn-primary" onClick={chooseOnMap}>
           map
-        </button>
+        </button> */}
 
         <div className="col-12">
           {canContinue && (
@@ -195,5 +195,7 @@ const PerfilForm3 = () => {
     </Layout>
   );
 };
+
+PerfilForm3.auth = true
 
 export default PerfilForm3;

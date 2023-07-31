@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session, 'sever side props');
-  if (session.user.isVerificationProcess) {
+  if (session?.user.isVerificationProcess) {
     return {
       redirect: {
         destination: '/perfil',
@@ -16,11 +16,11 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  return { props: session };
+  return { props: {} };
 }
 
-const PerfilForm2 = (props) => {
-  console.log(props, 'recargando');
+const PerfilForm2 = () => {
+
   // const { data: session } = useSession();
   const { state, dispatch } = useContext(context);
 
@@ -40,7 +40,7 @@ const PerfilForm2 = (props) => {
     if (!state.personalInfo.nombre) {
       router.push('/perfil-form-1');
     }
-  }, [props]);
+  }, []);
 
   useEffect(() => {
     const valores = Object.entries(inputValue);
@@ -214,4 +214,8 @@ const PerfilForm2 = (props) => {
   );
 };
 
+PerfilForm2.auth = true
+
 export default PerfilForm2;
+
+

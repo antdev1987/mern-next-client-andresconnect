@@ -7,6 +7,16 @@ import { context } from '@/context/ContextProvider';
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session, 'sever side props');
+
+  if(session == null){
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   if (!session.user.isVerificationProcess) {
     return {
       redirect: {
@@ -41,4 +51,6 @@ const perfil = () => {
   );
 };
 
+
+perfil.auth = true
 export default perfil;

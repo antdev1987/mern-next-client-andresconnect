@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session, 'sever side props');
-  if (session.user.isVerificationProcess) {
+  if (session?.user.isVerificationProcess) {
     return {
       redirect: {
         destination: '/perfil',
@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  return { props: session };
+  return { props: {} };
 }
 
 const initialState = {
@@ -330,5 +330,7 @@ const PerfilForm4 = () => {
     </Layout>
   );
 };
+
+PerfilForm4.auth= true
 
 export default PerfilForm4;

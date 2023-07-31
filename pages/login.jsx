@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 // import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
 import SocialGoogleLogin from "@/components/SocialButton/SocialGoogleLogin";
+import Link from "next/link";
 
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
@@ -16,7 +17,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: query.redirect === "/shipping" ? "/shipping" : "/",
+        destination: "/",
         permanent: false,
       },
     };
@@ -98,7 +99,9 @@ const Login = () => {
   return (
     <Layout title="Login">
       <section className="py-3">
-        <h1 className="text-muted">Sign In</h1>
+        <h1 className="text-muted">Iniciar</h1>
+
+        <p className=" fw-bold">Inicia sesión en tu cuenta Andress-Connect</p>
 
         <form onSubmit={handleSubmit} className="w-50">
           <legend className="bg-danger text-light text-center fw-bold">
@@ -143,6 +146,10 @@ const Login = () => {
 
         <div className=" w-50 mt-4 text-center">or</div>
         <SocialGoogleLogin />
+
+        <div>
+          <span>¿No tienes una cuenta?</span> <Link href={'/register'}>Registrate</Link>
+        </div>
 
         {/* <div className="w-50 py-4 border">
           <div className="d-flex justify-content-center">
