@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
   if (session?.user.isVerificationProcess) {
     return {
       redirect: {
-        destination: '/perfil',
+        destination: '/gestionar-cuenta',
         permanent: false,
       },
     };

@@ -66,7 +66,7 @@ const NavBarComp = () => {
             {/* esto pasa cuando estas logeado */}
             {session && (
               <>
-                <Nav.Link as={Link} href="/perfil">
+                <Nav.Link as={Link} href="/gestionar-cuenta">
                   <i className="bi bi-shop"></i> Publicar tu Espacio
                 </Nav.Link>
 

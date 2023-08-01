@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
   if (session?.user.isVerificationProcess) {
     return {
       redirect: {
-        destination: '/perfil',
+        destination: '/gestionar-cuenta',
         permanent: false,
       },
     };
@@ -127,10 +127,10 @@ const PerfilForm4 = () => {
       // update({isVerificationProcess:true})
       await sessionUpdate();
       dispatch({ type: 'isLoading_false' });
-      toast.success("Formulari enviado exitosamente");
+      toast.success("Formulario enviado exitosamente");
 
       // console.log(update)
-      router.push('/perfil');
+      router.push('/gestionar-cuenta');
     } catch (error) {
       console.log(error);
       getError(error.message);

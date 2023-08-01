@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 const SpinnerCustom = () => {
   const { state } = useContext(context);
 
-  console.log(state, 'espiner')
+  // console.log(state, 'espiner')
   return (
     <>
       {state.isLoading && (

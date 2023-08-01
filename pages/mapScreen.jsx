@@ -102,7 +102,7 @@ const MapScreen = () => {
             id="sample-map"
             mapContainerStyle={{ height: "100%", width: "100%" }}
             center={center}
-            zoom={15}
+            zoom={15}      
             onLoad={onLoad}
             onIdle={onIdle}
           >
@@ -111,7 +111,7 @@ const MapScreen = () => {
               onPlacesChanged={onPlacesChanged}
             >
               <div className="map-input-box">
-                <input type="text"  placeholder="enter your address"></input>
+                <input type="text"  placeholder="ingrese ciudad y pais"></input>
                 <button type="button" className="primary btn btn-primary" onClick={onConfirm}>
                   confirm
                 </button>
