@@ -729,7 +729,7 @@ const PerfilForm3 = () => {
           />
         </div>
 
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <label htmlFor="INPUTPROVINCIA" className="form-label">
             MUNICIPIO
           </label>
@@ -741,9 +741,9 @@ const PerfilForm3 = () => {
             name="municipio"
             value={inputValue.municipio}
           />
-        </div> */}
+        </div> 
 
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <label htmlFor="INPUTURREBA" className="form-label">
             PROVINCIA
           </label>
@@ -755,7 +755,7 @@ const PerfilForm3 = () => {
             name="provincia"
             value={inputValue.provincia}
           />
-        </div> */}
+        </div>
 
         <div className="col-md-4">
           <label htmlFor="inputSexo" className="form-label">
