@@ -11,6 +11,7 @@ export const uploadCloudinary = async(file) =>{
     formData.append('file', file)
     formData.append('upload_preset', 'ml_default_preset')
     formData.append('folder', 'mis_imagenes-desde_react');
+    formData.append('quality', '70')
 
 
     const {data}  = await axios.post('https://api.cloudinary.com/v1_1/dfumwi9fa/image/upload',formData)

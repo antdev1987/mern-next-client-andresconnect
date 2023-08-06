@@ -334,3 +334,48 @@ const PerfilForm4 = () => {
 PerfilForm4.auth= true
 
 export default PerfilForm4;
+
+
+// const finalList =[
+//   File {
+//     name: '4.jpeg',
+//     lastModified: 1689725103489,
+//     lastModifiedDate: new Date('2023-07-19T00:05:03.000Z'),
+//     webkitRelativePath: '',
+//     size: 104354,
+//     type: 'image/jpeg'
+//   }, File {
+//     name: '3.jpeg',
+//     lastModified: 1689725099673,
+//     lastModifiedDate: new Date('2023-07-19T00:04:59.000Z'),
+//     webkitRelativePath: '',
+//     size: 73271,
+//     type: 'image/jpeg'
+//   },
+  
+// ]
+
+// const list1 = [
+//   FileList {
+//     0: File {
+//       name: '4.jpeg',
+//       lastModified: 1689725103489,
+//       lastModifiedDate: new Date('2023-07-19T00:05:03.000Z'),
+//       webkitRelativePath: '',
+//       size: 104354,
+//       type: 'image/jpeg'
+//     },
+//     length: 1
+//   }, FileList {
+//     0: File {
+//       name: '3.jpeg',
+//       lastModified: 1689725099673,
+//       lastModifiedDate: new Date('2023-07-19T00:04:59.000Z'),
+//       webkitRelativePath: '',
+//       size: 73271,
+//       type: 'image/jpeg'
+//     },
+//     length: 1
+//   },
+  
+// ]
