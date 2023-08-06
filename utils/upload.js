@@ -87,8 +87,8 @@ export const uploadCloudinary = async (file) => {
         file,
         800,
         600,
-        "JPEG",
-        100,
+        "WEBP",
+        80,
         0,
         (uri) => {
           resolve(uri);
