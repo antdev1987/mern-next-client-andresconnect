@@ -34,7 +34,7 @@ const ImagesForm = () => {
         const data = await uploadCloudinary(finalList[i]);
         arr.push(data);
       }
-
+      console.log(arr, 'aqui en earr')
       setLoading(false);
       setLinks(arr);
     } catch (error) {

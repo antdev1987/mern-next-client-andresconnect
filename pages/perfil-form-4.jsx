@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { useSession, getSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import { uploadCloudinary } from '@/utils/upload';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -71,11 +72,11 @@ const PerfilForm4 = () => {
     setInputValue({ ...inputValue, [event.target.name]: file });
   };
 
-  useEffect(() => {
-    if (!state.direccionInfo?.provincia) {
-      router.push('/perfil-form-3');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!state.direccionInfo?.provincia) {
+  //     router.push('/perfil-form-3');
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (choose === 'pasaporte') {
@@ -101,45 +102,53 @@ const PerfilForm4 = () => {
       personalInfo: state.personalInfo,
       propiedadInfo: state.propiedadInfo,
       direccionInfo: state.direccionInfo,
+      images: [],
     };
 
-    // Crear un nuevo FormData
-    const formData = new FormData();
-    formData.append('uploadImages', inputValue.document);
-    formData.append('uploadImages', inputValue.front);
-    formData.append('uploadImages', inputValue.back);
-    formData.append('uploadImages', inputValue.nextTo);
-    formData.append('formInfo', JSON.stringify(formInfo));
+    const images = [inputValue.document, inputValue.front, inputValue.back];
 
-    // formData.append('', JSON.stringify(state));
-    // console.log(inputValue);
+    if (inputValue.nextTo) {
+      images.push(inputValue.nextTo);
+    }
+
+    console.log(inputValue);
     try {
       const config = {
         headers: { Authorization: `Bearer ${session.user.token}` },
       };
+
+      // AQUI LOS MANDO A CLOUDINARY LAS IMAGENES
+      for (let i = 0; i < images.length; i++) {
+        const data = await uploadCloudinary(images[i]);
+        formInfo.images.push(data);
+      }
+      console.log(formInfo.images, 'aqui en earr');
+      //////////////////
+
+      // AQUI MANDO DATOS DEL FORMULARIO
       const data = await axios.post(
         `${process.env.BASE_URL}/user/userverification/`,
-        formData,
+        formInfo,
         config
       );
+      ////////////////////////
+
       console.log(data);
       dispatch({ type: 'LIMPIAR_INFO' });
       // update({isVerificationProcess:true})
       await sessionUpdate();
-      dispatch({ type: 'isLoading_false' });
-      toast.success("Formulario enviado exitosamente");
 
+      toast.success('Formulario enviado exitosamente');
       // console.log(update)
       router.push('/gestionar-cuenta');
     } catch (error) {
       console.log(error);
       getError(error.message);
       console.log(getError(error));
-      toast.warning('Upss vuelve a intentarlo porfavor')
-    }finally{
+      toast.warning('Upss vuelve a intentarlo porfavor');
+    } finally {
       dispatch({ type: 'isLoading_false' });
     }
-
   };
   return (
     <Layout title="informacion personal">
@@ -335,10 +344,9 @@ const PerfilForm4 = () => {
   );
 };
 
-PerfilForm4.auth= true
+PerfilForm4.auth = true;
 
 export default PerfilForm4;
-
 
 // const finalList =[
 //   File {
@@ -356,7 +364,7 @@ export default PerfilForm4;
 //     size: 73271,
 //     type: 'image/jpeg'
 //   },
-  
+
 // ]
 
 // const list1 = [
@@ -381,5 +389,5 @@ export default PerfilForm4;
 //     },
 //     length: 1
 //   },
-  
+
 // ]
