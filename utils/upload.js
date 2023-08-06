@@ -85,8 +85,8 @@ export const uploadCloudinary = async (file) => {
     new Promise((resolve) => {
         FileResizer.imageFileResizer(
         file,
-        300,
-        300,
+        800,
+        600,
         "JPEG",
         100,
         0,
