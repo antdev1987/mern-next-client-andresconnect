@@ -51,25 +51,75 @@
 // };
 
 
-import axios from 'axios'
+// import axios from 'axios'
 
 
-export const uploadCloudinary = async(file) =>{
+// export const uploadCloudinary = async(file) =>{
 
-    // console.log(file,'deupload')
+//     // console.log(file,'deupload')
 
-    const formData = new FormData()
-    // console.log('el form data')
+//     const formData = new FormData()
+//     // console.log('el form data')
 
-    formData.append('file', file)
-    formData.append('upload_preset', 'ml_default_preset')
-    formData.append('folder', 'mis_imagenes-desde_react');
-
-
-    const {data}  = await axios.post('https://api.cloudinary.com/v1_1/dfumwi9fa/image/upload',formData)
+//     formData.append('file', file)
+//     formData.append('upload_preset', 'ml_default_preset')
+//     formData.append('folder', 'mis_imagenes-desde_react');
 
 
+//     const {data}  = await axios.post('https://api.cloudinary.com/v1_1/dfumwi9fa/image/upload',formData)
 
-    return {publicId:data?.public_id, url:data?.secure_url}
 
-}
+
+//     return {publicId:data?.public_id, url:data?.secure_url}
+
+// }
+
+import axios from 'axios';
+// import imageFileResizer from 'react-image-file-resizer';
+import FileResizer from 'react-image-file-resizer';
+
+export const uploadCloudinary = async (file) => {
+    console.log(file,'el file')
+
+    const resizeFile = (file) =>
+    new Promise((resolve) => {
+        FileResizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
+    
+    const resizedBlob = await resizeFile(file);
+
+    console.log(resizedBlob,'ver')
+    
+  // Crear un nuevo objeto File a partir del Blob redimensionado
+  const resizedFile = new File([resizedBlob], file.name, {
+    type: file.type,
+    lastModified: file.lastModified,
+  });
+
+  const formData = new FormData();
+  formData.append('file', resizedFile);
+  formData.append('upload_preset', 'ml_default_preset');
+  formData.append('folder', 'mis_imagenes-desde_react');
+
+  try {
+    const { data } = await axios.post(
+      'https://api.cloudinary.com/v1_1/dfumwi9fa/image/upload',
+      formData
+    );
+    return { publicId: data?.public_id, url: data?.secure_url };
+  } catch (error) {
+    console.error('Error al subir la imagen a Cloudinary:', error);
+    throw error;
+  }
+};
