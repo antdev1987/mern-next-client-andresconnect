@@ -135,7 +135,11 @@ const PerfilForm4 = () => {
       console.log(error);
       getError(error.message);
       console.log(getError(error));
+      toast.warning('Upss vuelve a intentarlo porfavor')
+    }finally{
+      dispatch({ type: 'isLoading_false' });
     }
+
   };
   return (
     <Layout title="informacion personal">

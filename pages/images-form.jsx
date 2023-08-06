@@ -2,7 +2,7 @@ import { uploadCloudinary } from "@/utils/upload";
 import React, { useState } from "react";
 
 const ImagesForm = () => {
-//   const [images, setImages] = useState([]);
+  //   const [images, setImages] = useState([]);
   const [links, setLinks] = useState();
   const [loading, setLoading] = useState(false);
   const [image1, setImage1] = useState(null);
@@ -18,18 +18,14 @@ const ImagesForm = () => {
     setImages((prevFileList) => [...prevFileList, ...files]);
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- 
     //aki creo un array con los dos inputs y sus imagenes
-    const images = [image1,image2, image3]
+    const images = [image1, image2, image3];
     //aki transformo el array de arriba al array que necesita cloudinary para subir las imagenes
     const finalList = images.map((fileList) => fileList[0]);
 
-    
     //pload preset must be whitelisted for unsigned uploads
     try {
       let arr = [];
@@ -38,6 +34,7 @@ const ImagesForm = () => {
         const data = await uploadCloudinary(finalList[i]);
         arr.push(data);
       }
+
       setLoading(false);
       setLinks(arr);
     } catch (error) {
@@ -51,25 +48,24 @@ const ImagesForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="file"
-            // multiple={true}
-        //   multiple
-        //   onChange={handleImageChange}
-        onChange={(e) => setImage1(e.target.files)}
+          // multiple={true}
+          //   multiple
+          //   onChange={handleImageChange}
+          onChange={(e) => setImage1(e.target.files)}
         />
 
         <input
           type="file"
-        //   multiple
-            onChange={(e) => setImage2(e.target.files)}
-        //   onChange={handleImageChange}
+          //   multiple
+          onChange={(e) => setImage2(e.target.files)}
+          //   onChange={handleImageChange}
         />
 
-
-<input
+        <input
           type="file"
-        //   multiple
-            onChange={(e) => setImage3(e.target.files)}
-        //   onChange={handleImageChange}
+          //   multiple
+          onChange={(e) => setImage3(e.target.files)}
+          //   onChange={handleImageChange}
         />
 
         <button type="submit">{loading ? "Loading..." : "Upload"}</button>
