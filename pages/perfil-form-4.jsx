@@ -105,11 +105,11 @@ const PerfilForm4 = () => {
       images: [],
     };
 
-    const images = [inputValue.document, inputValue.front, inputValue.back];
+    const images = [inputValue.document, inputValue.front, inputValue.selfie];
 
-    // if (inputValue.nextTo) {
-    //   images.push(inputValue.nextTo);
-    // }
+    if (inputValue.back) {
+      images.push(inputValue.back);
+    }
 
     console.log(inputValue);
     try {
