@@ -28,10 +28,9 @@ const initialState = {
   termino_condiciones: false,
   politica_privacidad: false,
   politica_uso: false,
-  document: null,
   back: null,
   front: null,
-  nextTo: null,
+  selfie: null,
 };
 
 const PerfilForm4 = () => {
@@ -53,6 +52,7 @@ const PerfilForm4 = () => {
   const choosing = (e) => {
     setInputValue({
       ...initialState,
+      selfie: inputValue.selfie,
       document: inputValue.document,
       termino_condiciones: inputValue.termino_condiciones,
       politica_privacidad: inputValue.politica_privacidad,
@@ -80,9 +80,9 @@ const PerfilForm4 = () => {
 
   useEffect(() => {
     if (choose === 'pasaporte') {
-      delete inputValue.nextTo;
+      delete inputValue.back;
     }
-
+    
     const valores = Object?.entries(inputValue);
 
     for (const valor of valores) {
@@ -107,9 +107,9 @@ const PerfilForm4 = () => {
 
     const images = [inputValue.document, inputValue.front, inputValue.back];
 
-    if (inputValue.nextTo) {
-      images.push(inputValue.nextTo);
-    }
+    // if (inputValue.nextTo) {
+    //   images.push(inputValue.nextTo);
+    // }
 
     console.log(inputValue);
     try {
@@ -158,12 +158,15 @@ const PerfilForm4 = () => {
 
       <form action="#" onSubmit={handleSubmit}>
         <div className="pb-3">
-          <label htmlFor="documento" className="d-block">
-            <span className="fs-4">
+          <h3 className="d-block">
+            <span className="">
               Subir archivo que indique que estas ocupando;
             </span>{' '}
-            Contrato de luz, Recivo de luz (Fecha actual), Contrato de alquiler
-          </label>
+            <span className="fs-6">
+              Contrato de luz, Recivo de luz (Fecha actual), Contrato de
+              alquiler
+            </span>
+          </h3>
           <div>
             {inputValue.document && (
               <img
@@ -174,16 +177,21 @@ const PerfilForm4 = () => {
               />
             )}
           </div>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            className="d-inline-block mt-3"
-            name="document"
-            id="documento"
-          />
+          <div className="d-flex align-items-center gap-2 mt-3">
+            <label className="btn btn-outline-danger" htmlFor="document">
+              Archivo
+            </label>
+            <input
+              type="file"
+              name="document"
+              id="document"
+              className="d-none"
+              onChange={handleImageChange}
+            />
+          </div>
         </div>
 
-        <h3 className="mt-3">Tomar foto de identidad o pasaporte</h3>
+        <h3 className="mt-3">Subir foto de identidad o pasaporte </h3>
 
         <div className="form-check">
           <input
@@ -215,7 +223,7 @@ const PerfilForm4 = () => {
 
         {choose && (
           <>
-            <p className="fs-4 pt-2">Subir imagen de:</p>
+            {/* <h3 className="fs-4 pt-2 mt-3">Subir foto de identidad:</h3> */}
 
             <div className="d-flex gap-5">
               <div>
@@ -236,61 +244,73 @@ const PerfilForm4 = () => {
                     name="front"
                     id="front"
                     className="d-none"
-                    onChange={handleImageChange}
-                  />
-                </div>
-              </div>
-
-              <div>
-                {inputValue.back && (
-                  <img
-                    src={URL.createObjectURL(inputValue.back)}
-                    alt="Uploaded"
-                    width={100}
-                    height={100}
-                  />
-                )}
-                <div className="d-flex align-items-center gap-2 mt-3">
-                  <label className="btn btn-outline-danger" htmlFor="back">
-                    Atras
-                  </label>
-                  <input
-                    type="file"
-                    name="back"
-                    id="back"
-                    className="d-none"
+                    value=""
                     onChange={handleImageChange}
                   />
                 </div>
               </div>
 
               {choose === 'identidad' && (
-                <div>
-                  {inputValue.nextTo && (
-                    <img
-                      src={URL.createObjectURL(inputValue.nextTo)}
-                      alt="Uploaded"
-                      width={100}
-                      height={100}
-                    />
-                  )}
-                  <div className="d-flex align-items-center gap-2 mt-3">
-                    <label className="btn btn-outline-danger" htmlFor="nextTo">
-                      Al lado del documento
-                    </label>
-                    <input
-                      type="file"
-                      name="nextTo"
-                      id="nextTo"
-                      className="d-none"
-                      onChange={handleImageChange}
-                    />
-                  </div>
-                </div>
+                <>
+                  <div>
+                    {inputValue.back && (
+                      <img
+                        src={URL.createObjectURL(inputValue.back)}
+                        alt="Uploaded"
+                        width={100}
+                        height={100}
+                      />
+                    )}
+                    <div className="d-flex align-items-center gap-2 mt-3">
+                      <label className="btn btn-outline-danger" htmlFor="back">
+                        Atras
+                      </label>
+                      <input
+                        type="file"
+                        name="back"
+                        id="back"
+                        className="d-none"
+                        value=""
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                  </div>{' '}
+                </>
               )}
             </div>
           </>
         )}
+
+        <div className="py-3">
+          <h3 className="">
+            Subir foto del selfie{' '}
+            <Link href="" className="btn btn-outline-success">
+              NEED HELP? <i className="bi bi-question-circle-fill"></i>
+            </Link>
+          </h3>{' '}
+          <div>
+            {inputValue.selfie && (
+              <img
+                src={URL.createObjectURL(inputValue?.selfie)}
+                alt="Uploaded"
+                width={100}
+                height={100}
+              />
+            )}
+          </div>
+          <div className="d-flex align-items-center gap-2 mt-3">
+            <label className="btn btn-outline-danger" htmlFor="selfie">
+              Selfie
+            </label>
+            <input
+              type="file"
+              name="selfie"
+              id="selfie"
+              className="d-none"
+              onChange={handleImageChange}
+            />
+          </div>
+        </div>
 
         <div className="mt-3">
           <h3 className="mt-3">Aceptar Condiciones y Terminos</h3>
