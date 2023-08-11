@@ -140,10 +140,10 @@ const PerfilForm4 = () => {
 
       toast.success('Formulario enviado exitosamente');
       // console.log(update)
-      router.push('/gestionar-cuenta');
+      router.push('/tu-espacio');
+
     } catch (error) {
       console.log(error);
-      getError(error.message);
       console.log(getError(error));
       toast.warning('Upss vuelve a intentarlo porfavor');
     } finally {
