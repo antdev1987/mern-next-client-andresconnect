@@ -10,28 +10,29 @@ import Link from "next/link";
 
 
 //this is to get rid of the flash login page if you try to go back when you are authenticated
-export async function getServerSideProps(context) {
-  const { query } = context; // get query parameters from context
-  const session = await getSession(context);
+// export async function getServerSideProps(context) {
+//   const { query } = context; // get query parameters from context
+//   const session = await getSession(context);
 
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+//   if (session) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      session,
-    },
-  };
-}
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
 
 const Login = () => {
   const { data: session, status } = useSession();
+  console.log(status, 'login')
   const [isLoading, setIsLoading] = useState(false);
   const [warningText, setWarningText] = useState();
   const emailRef = useRef();
