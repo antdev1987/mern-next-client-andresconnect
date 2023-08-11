@@ -178,6 +178,8 @@ const PerfilForm4 = () => {
             type="file"
             onChange={handleImageChange}
             className="d-inline-block mt-3"
+            accept="image/*"
+            capture="user"
             name="document"
             id="documento"
           />
