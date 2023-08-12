@@ -67,7 +67,7 @@ const perfil = () => {
 
           <AmenidadesZona onChecked={onChecked} />
 
-          <button type='submit'>Salvar</button>
+          <button type='submit' className='btn btn-primary'>Salvar</button>
         </form>
       </section>
     </Layout>

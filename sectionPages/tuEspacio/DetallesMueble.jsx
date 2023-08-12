@@ -44,7 +44,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
           <label htmlFor="TipoCama">Tipo de Cama</label>
           <Form.Control
             className="mt-2"
-            type="number"
+            type="text"
             id="TipoCama"
             name="TipoCama"
             onChange={onChangeInputValue}
