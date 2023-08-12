@@ -6,7 +6,7 @@ export const AmenidadesZona = ({onChecked}) => {
       <h2 className="text-secondary mt-3">Amenidades de la Zona de la Pro.</h2>
 
       <ul className="row list-none p-0 mt-3">
-        <li className="col-3">
+        <li className="col-12 col-sm-3">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input
               type="checkbox"
@@ -63,7 +63,7 @@ export const AmenidadesZona = ({onChecked}) => {
           </div>
         </li>
 
-        <li className="col-3">
+        <li className="col-12 col-sm-3">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input type="checkbox" name="cine" id="cine" onChange={onChecked} />
             <label htmlFor="cine">Cine</label>

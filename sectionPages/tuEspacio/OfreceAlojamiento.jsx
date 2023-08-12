@@ -6,7 +6,7 @@ export const OfreceAlojamiento = ({onChecked}) => {
       <h2 className="text-secondary mt-3">Lo que ofrece el alojamiento</h2>
 
       <ul className="row list-none p-0 mt-3">
-        <li className="col-3">
+        <li className="col-12 col-sm-3">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input
               type="checkbox"
@@ -50,7 +50,7 @@ export const OfreceAlojamiento = ({onChecked}) => {
             <label htmlFor="terraza">Terraza</label>
           </div>
         </li>
-        <li className="col-3">
+        <li className="col-12 col-sm-3">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input
               type="checkbox"
