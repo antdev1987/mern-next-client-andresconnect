@@ -1,17 +1,23 @@
-import Layout from "@/components/Layout/Layout";
-import React, { useContext, useEffect } from "react";
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { context } from "@/context/ContextProvider";
-import Link from "next/link";
+import Layout from '@/components/Layout/Layout';
+import React, { useContext, useEffect, useState } from 'react';
+import { getSession, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { context } from '@/context/ContextProvider';
+
+import {
+  AmenidadesZona,
+  DetallesMueble,
+  FotosPropiedad,
+  OfreceAlojamiento,
+} from '@/sectionPages/tuEspacio';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  
+
   if (session == null) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };
@@ -20,7 +26,7 @@ export async function getServerSideProps(context) {
   if (!session.user.isVerificationProcess) {
     return {
       redirect: {
-        destination: "/perfil-form-1",
+        destination: '/perfil-form-1',
         permanent: false,
       },
     };
@@ -32,31 +38,37 @@ const perfil = () => {
   const { dispatch } = useContext(context);
   const router = useRouter();
 
-//   useEffect(() => {
-//     if (!session?.user) return;
+  const [inputValue, setInputValue] = useState({
+    invitados: 0,
+    cantidadHabitaciones: 0,
+    cantidadParqueo: 0,
+    cantidadBathrooms: 0,
+  });
 
-//     // console.log(session, 'useffect');
+  const onChangeInputValue = (e) => {
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value.trim() });
+  };
 
-//     if (!session?.user?.isVerificationProcess) {
-//       router.push("/perfil-form-1");
-//     }
-//     console.log("verificando loop");
-//   }, [session]);
-
-  // console.log(session, '1');
-
-//   const chooseOnMap = () => {
-//     router.push("/mapScreen");
-//   };
+  const onChecked = (e) => {
+    setInputValue({ ...inputValue, [e.target.name]: e.target.checked });
+  };
 
   return (
-    <Layout title='Gestionar tu Espacio'>
+    <Layout title="Gestionar tu Espacio">
       <section className="py-3">
         <h1>Gestionar tu Espacio</h1>
 
+        <form action="#">
+          <FotosPropiedad />
 
+          <DetallesMueble onChangeInputValue={onChangeInputValue} />
 
+          <OfreceAlojamiento onChecked={onChecked} />
 
+          <AmenidadesZona onChecked={onChecked} />
+
+          <button type='submit'>Salvar</button>
+        </form>
       </section>
     </Layout>
   );
