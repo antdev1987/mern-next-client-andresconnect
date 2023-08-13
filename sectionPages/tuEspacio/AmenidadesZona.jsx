@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const AmenidadesZona = ({onChecked}) => {
+export const AmenidadesZona = ({ onChecked, otrosLugares }) => {
   return (
     <>
       <h2 className="text-secondary mt-3">Amenidades de la Zona de la Pro.</h2>
 
       <ul className="row list-none p-0 mt-3">
-        <li className="col-12 col-sm-3">
+        <li className="col-12 col-sm-6">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input
               type="checkbox"
@@ -61,14 +61,14 @@ export const AmenidadesZona = ({onChecked}) => {
             />
             <label htmlFor="ecologico">Ecologico</label>
           </div>
-        </li>
 
-        <li className="col-12 col-sm-3">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input type="checkbox" name="cine" id="cine" onChange={onChecked} />
             <label htmlFor="cine">Cine</label>
           </div>
+        </li>
 
+        <li className="col-12 col-sm-6">
           <div className="d-flex gap-2 align-items-center mt-3">
             <input
               type="checkbox"
@@ -116,8 +116,22 @@ export const AmenidadesZona = ({onChecked}) => {
             />
             <label htmlFor="otrosLugares">Otros Lugares Recreativos</label>
           </div>
+
+          {otrosLugares && (
+            <div className="mt-3">
+              <input type="text" name="otrosInfo" />
+            </div>
+          )}
         </li>
       </ul>
+
+      <h2 className="text-secondary mt-3">Habla sobre tu alojamiento</h2>
+
+      <textarea
+        rows="10"
+        placeholder="Escriba una descripcion"
+        className='w-100'
+      ></textarea>
     </>
   );
 };

@@ -7,8 +7,10 @@ import { context } from '@/context/ContextProvider';
 import {
   AmenidadesZona,
   DetallesMueble,
-  FotosPropiedad,
+  Fotos,
   OfreceAlojamiento,
+  ServicioOfrecidoA,
+  TuGenero,
 } from '@/sectionPages/tuEspacio';
 
 export async function getServerSideProps(context) {
@@ -58,16 +60,34 @@ const perfil = () => {
       <section className="py-3">
         <h1>Gestionar tu Espacio</h1>
 
-        <form action="#">
-          <FotosPropiedad />
+        <form action="#" className="d-flex flex-column flex-sm-row gap-5">
+          <div className="flex-1">
+            <Fotos sobre="propiedad" />
 
-          <DetallesMueble onChangeInputValue={onChangeInputValue} />
+            <DetallesMueble onChangeInputValue={onChangeInputValue} />
 
-          <OfreceAlojamiento onChecked={onChecked} />
+            <OfreceAlojamiento onChecked={onChecked} otros={inputValue.otros} />
 
-          <AmenidadesZona onChecked={onChecked} />
+            <AmenidadesZona
+              onChecked={onChecked}
+              otrosLugares={inputValue.otrosLugares}
+            />
 
-          <button type='submit' className='btn btn-primary'>Salvar</button>
+            <button type="submit" className="btn btn-primary">
+              Salvar
+            </button>
+          </div>
+          <div className="flex-1">
+            <Fotos sobre="scurt" />
+
+            <TuGenero onChecked={onChecked} />
+
+            <ServicioOfrecidoA onChecked={onChecked} />
+
+            <button type="submit" className="btn btn-primary">
+              Salvar
+            </button>
+          </div>
         </form>
       </section>
     </Layout>

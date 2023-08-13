@@ -7,7 +7,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
       <h2 className="text-secondary mt-3">Detalles del mueble</h2>
 
       <ul className="row p-0 list-none mt-3">
-        <li className="col-12 col-md-4">
+        <li className="col-12">
           <label htmlFor="cantidadHabitaciones">Cantidad de habitaciones</label>
           <Form.Control
             className="mt-2"
@@ -18,7 +18,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
           />
         </li>
 
-        <li className="col-12 col-md-4">
+        <li className="col-12 mt-3">
           <label htmlFor="cantidadParqueo">Cantidad de Parqueos</label>
           <Form.Control
             className="mt-2"
@@ -29,7 +29,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
           />
         </li>
 
-        <li className="col-12 col-md-4">
+        <li className="col-12 mt-3">
           <label htmlFor="cantidadBathrooms">Cantidad de Baños</label>
           <Form.Control
             className="mt-2"
@@ -40,7 +40,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
           />
         </li>
 
-        <li className="col-12 col-md-4 mt-md-3">
+        <li className="col-12 mt-3">
           <label htmlFor="TipoCama">Tipo de Cama</label>
           <Form.Control
             className="mt-2"
