@@ -66,7 +66,7 @@ export const ServicioOfrecidoA = ({ onChecked }) => {
       </ul>
 
       <h2 className="text-secondary mt-3">
-        Los servicios que llevara tu scurt
+        Los servicios que llevara tu scort
       </h2>
 
       <textarea

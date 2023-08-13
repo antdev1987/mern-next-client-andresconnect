@@ -78,7 +78,7 @@ const perfil = () => {
             </button>
           </div>
           <div className="flex-1">
-            <Fotos sobre="scurt" />
+            <Fotos sobre="scort" />
 
             <TuGenero onChecked={onChecked} />
 
