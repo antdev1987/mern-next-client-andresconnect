@@ -242,11 +242,21 @@
   margin-top: 10px;
 }
 
+.scort-pagination--gallery {
+  height: 5rem;
+  overflow: unset !important;
+  overflow-x: hidden;
+}
+
 .scort-pagination .swiper-slide {
-  width: 25%;
+  /* width: 25%; */
   height: 100%;
   opacity: 0.4;
   cursor: pointer;
+}
+
+.scort-pagination--gallery .swiper-slide {
+  opacity: 1;
 }
 
 .scort-pagination .swiper-slide-thumb-active {

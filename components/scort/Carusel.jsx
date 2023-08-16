@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -22,7 +22,7 @@ import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 
-const Carusel = ({imgs}) => {
+const Carusel = ({ imgs }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const buttonRef = useRef(null);

@@ -119,7 +119,7 @@ const PerfilForm4 = () => {
 
       // AQUI LOS MANDO A CLOUDINARY LAS IMAGENES
       for (let i = 0; i < images.length; i++) {
-        const data = await uploadCloudinary(images[i]);
+        const data = await uploadCloudinary(images[i], 800, 600, 80, "identidad");
         formInfo.images.push(data);
       }
       console.log(formInfo.images, 'aqui en earr');

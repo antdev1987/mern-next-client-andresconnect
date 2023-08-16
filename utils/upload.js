@@ -78,17 +78,17 @@ import axios from 'axios';
 // import imageFileResizer from 'react-image-file-resizer';
 import FileResizer from 'react-image-file-resizer';
 
-export const uploadCloudinary = async (file) => {
-    console.log(file,'el file')
+export const uploadCloudinary = async (file, x, y, quality, folderName) => {
+    // console.log(file,'el file')
 
     const resizeFile = (file) =>
     new Promise((resolve) => {
         FileResizer.imageFileResizer(
         file,
-        800,
-        600,
+        x,
+        y,
         "WEBP",
-        80,
+        quality,
         0,
         (uri) => {
           resolve(uri);
@@ -99,7 +99,7 @@ export const uploadCloudinary = async (file) => {
     
     const resizedBlob = await resizeFile(file);
 
-    console.log(resizedBlob,'ver')
+    // console.log(resizedBlob,'ver')
     
   // Crear un nuevo objeto File a partir del Blob redimensionado
   const resizedFile = new File([resizedBlob], file.name, {
@@ -110,13 +110,14 @@ export const uploadCloudinary = async (file) => {
   const formData = new FormData();
   formData.append('file', resizedFile);
   formData.append('upload_preset', 'ml_default_preset');
-  formData.append('folder', 'mis_imagenes-desde_react');
+  formData.append('folder', folderName);
 
   try {
     const { data } = await axios.post(
       'https://api.cloudinary.com/v1_1/dfumwi9fa/image/upload',
       formData
     );
+    console.log(data)
     return { publicId: data?.public_id, url: data?.secure_url };
   } catch (error) {
     console.error('Error al subir la imagen a Cloudinary:', error);

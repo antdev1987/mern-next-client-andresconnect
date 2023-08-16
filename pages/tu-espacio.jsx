@@ -60,33 +60,37 @@ const perfil = () => {
       <section className="py-3">
         <h1>Gestionar tu Espacio</h1>
 
-        <form action="#" className="d-flex flex-column flex-sm-row gap-5">
-          <div className="flex-1">
-            <Fotos sobre="propiedad" />
+        <form action="#" className="row">
+          <div className="col-12 col-sm-6">
+            <div className="border border-2 border-danger p-2 rounded">
+              <Fotos sobre="propiedad" limite={10} />
 
-            <DetallesMueble onChangeInputValue={onChangeInputValue} />
+              <DetallesMueble onChangeInputValue={onChangeInputValue} />
 
-            <OfreceAlojamiento onChecked={onChecked} otros={inputValue.otros} />
+              <OfreceAlojamiento
+                onChecked={onChecked}
+                otros={inputValue.otros}
+              />
 
-            <AmenidadesZona
-              onChecked={onChecked}
-              otrosLugares={inputValue.otrosLugares}
-            />
+              <AmenidadesZona
+                onChecked={onChecked}
+                otrosLugares={inputValue.otrosLugares}
+              />
 
-            <button type="submit" className="btn btn-primary">
-              Salvar
-            </button>
+              <button type="submit" className="btn btn-primary">
+                Salvar
+              </button>
+            </div>
           </div>
-          <div className="flex-1">
-            <Fotos sobre="scort" />
-
-            <TuGenero onChecked={onChecked} />
-
-            <ServicioOfrecidoA onChecked={onChecked} />
-
-            <button type="submit" className="btn btn-primary">
-              Salvar
-            </button>
+          <div className="col-12 col-sm-6">
+            <div className="border border-2 border-danger p-2 rounded">
+              <Fotos sobre="scort" limite={5} />
+              <TuGenero onChecked={onChecked} />
+              <ServicioOfrecidoA onChecked={onChecked} />
+              <button type="submit" className="btn btn-primary">
+                Salvar
+              </button>
+            </div>
           </div>
         </form>
       </section>
