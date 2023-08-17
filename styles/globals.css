@@ -243,9 +243,13 @@
 }
 
 .scort-pagination--gallery {
-  height: 5rem;
+  height: 9rem;
   overflow: unset !important;
   overflow-x: hidden;
+}
+
+.scort-pagination--gallery img {
+  cursor: default;
 }
 
 .scort-pagination .swiper-slide {
@@ -282,7 +286,7 @@ body:has(.spinnerCustom) {
   position: fixed;
   top: 0;
   left: 0;
-  
+
   height: 100vh;
   height: 100svh;
   width: 100%;
@@ -413,4 +417,22 @@ body:has(.spinnerCustom) {
 .gmnoprint {
   background-color: red;
   margin-top: 60px !important;
+}
+
+.dropdown-toggle::before {
+  display: none !important;
+}
+
+.dropdown-toggle.btn {
+  --bs-btn-padding-y: .05rem;
+  --bs-btn-padding-x: .25rem;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  background-color: black;
+  font-size: .8rem;
+}
+
+.swiper-backface-hidden .swiper-slide {
+  transform: unset !important;
 }

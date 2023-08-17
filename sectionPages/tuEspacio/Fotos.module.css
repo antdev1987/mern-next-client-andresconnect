@@ -14,3 +14,9 @@
   top: -13px;
   right: -10px;
 }
+
+.drop {
+  position: absolute;
+  top: 0;
+  right: .25rem;
+}

@@ -61,7 +61,7 @@ const perfil = () => {
         <h1>Gestionar tu Espacio</h1>
 
         <form action="#" className="row">
-          <div className="col-12 col-sm-6">
+          <div className="col-12 col-md-6">
             <div className="border border-2 border-danger p-2 rounded">
               <Fotos sobre="propiedad" limite={10} />
 
@@ -82,7 +82,7 @@ const perfil = () => {
               </button>
             </div>
           </div>
-          <div className="col-12 col-sm-6">
+          <div className="col-12 col-md-6">
             <div className="border border-2 border-danger p-2 rounded">
               <Fotos sobre="scort" limite={5} />
               <TuGenero onChecked={onChecked} />
