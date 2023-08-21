@@ -251,7 +251,7 @@ export const Fotos = ({ sobre, limite }) => {
                 </button> */}
                 <DropdownButton
                   className={`${style.drop}`}
-                  title={<i class="bi bi-three-dots-vertical"></i>}
+                  title={<i className="bi bi-three-dots-vertical"></i>}
                   drop={'start'}
                 >
                   <Dropdown.Item onClick={() => deleteTest(idx, publicId)}>

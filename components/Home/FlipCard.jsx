@@ -4,15 +4,17 @@ import Link from 'next/link';
 
 import { Carousel } from 'react-bootstrap';
 import ReactCardFlip from 'react-card-flip';
+import Image from 'next/image';
 
-
-const FlipCard = () => {
+const FlipCard = ({ propiedadImg }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [onHover, setOnHover] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+
+  console.log(propiedadImg, 'TESTTEstes');
 
   return (
     <ReactCardFlip
@@ -30,6 +32,19 @@ const FlipCard = () => {
           onMouseLeave={() => setOnHover(false)}
         >
           <Carousel interval={onHover ? 1500 : null} pause={false}>
+            {propiedadImg?.map((item, idx) => (
+              <Carousel.Item key={idx}>
+                <Image
+                  src={item.url}
+                  loading="lazy"
+                  decoding="async"
+                  width={250}
+                  height={300}
+                  alt="images"
+                  className="img-house"
+                />
+              </Carousel.Item>
+            ))}
             <Carousel.Item>
               <img
                 src={
@@ -66,7 +81,6 @@ const FlipCard = () => {
                 className="img-house"
               />
             </Carousel.Item>
-            
           </Carousel>
         </div>
 
@@ -84,7 +98,7 @@ const FlipCard = () => {
             />
 
             <p className="fw-bold m-0">
-              Jose Ignacio
+              "JENIFER"
               <span className="d-block fw-light pointer" onClick={handleClick}>
                 Ver Perfil
               </span>
@@ -141,7 +155,9 @@ const FlipCard = () => {
           </li>
         </ul>
 
-        <Link href='/scort/5' className="w-100 btn btn-outline-danger">Mostrar Mas</Link>
+        <Link href="/scort/5" className="w-100 btn btn-outline-danger">
+          Mostrar Mas
+        </Link>
 
         <i
           className="back bi bi-arrow-return-left fs-2 curosr-pointer text-danger"

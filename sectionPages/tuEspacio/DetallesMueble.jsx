@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-export const DetallesMueble = ({onChangeInputValue}) => {
+export const DetallesMueble = ({inputValues, onChangeInputValue}) => {
   return (
     <>
       <h2 className="text-secondary mt-3">Detalles del mueble</h2>
@@ -14,6 +14,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
             type="number"
             id="cantidadHabitaciones"
             name="cantidadHabitaciones"
+            value={inputValues.cantidadHabitaciones}
             onChange={onChangeInputValue}
           />
         </li>
@@ -25,6 +26,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
             type="number"
             id="cantidadParqueo"
             name="cantidadParqueo"
+            value={inputValues.cantidadParqueo}
             onChange={onChangeInputValue}
           />
         </li>
@@ -36,6 +38,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
             type="number"
             id="cantidadBathrooms"
             name="cantidadBathrooms"
+            value={inputValues.cantidadBathrooms}
             onChange={onChangeInputValue}
           />
         </li>
@@ -47,6 +50,7 @@ export const DetallesMueble = ({onChangeInputValue}) => {
             type="text"
             id="TipoCama"
             name="TipoCama"
+            value={inputValues.TipoCama}
             onChange={onChangeInputValue}
           />
         </li>

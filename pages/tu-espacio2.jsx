@@ -15,6 +15,7 @@ import {
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import getError from '@/utils/getError';
+import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -159,121 +160,79 @@ const perfil = () => {
         { formInfo },
         config
       );
-  
+
       console.log(data, 'DATOS DEL BACK');
       console.log(formInfo, 'Form data');
-      // toast.success("Cambios realizados")
-      router.push('/revisar-publicar')
+      toast.success('Cambios realizados');
     } catch (error) {
-      toast.error(getError(error))
+      toast.error(getError(error));
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(
-        `${process.env.BASE_URL}/espacio/publicar`,
-        config
-      );
-
-      if (!data.espacioInfo) return;
-
-      const { espacioInfo } = data;
-
-      console.log(data, 'datos');
-      setOtros(espacioInfo?.otros || initialOtros);
-
-      // Convierte los arrays a objetos
-      function convertArraysToObjects(data) {
-        const result = {};
-
-        for (const key in data) {
-          if (Array.isArray(data[key])) {
-            const convertedObject = {};
-            data[key].forEach((item) => {
-              convertedObject[item] = true;
-            });
-            result[key] = convertedObject;
-          } else {
-            result[key] = data[key];
-          }
-        }
-
-        return result;
-      }
-
-      const convertido = convertArraysToObjects(espacioInfo);
-
-      // Elimino otros para guardar en el inputValue
-      delete convertido.otros;
-
-      console.log(convertido);
-      setInputValue(convertido);
-    };
-
-    fetchData();
-  }, []);
 
   console.log(inputValue);
 
   return (
-    <Layout title="Gestionar tu Espacio">
-      <section className="py-3">
-        <h1>Gestionar tu Espacio</h1>
+    <Layout title="Espacio 2">
+      <div>
+        <div className="p-3 text-center bg-warning">
+          <h4>
+            En estos momentos tu solicitud esta siendo revisada, este proceso
+            podria tardar hasta 72 horas
+          </h4>
+        </div>
 
-        <form action="#" className="row" onSubmit={submitPropiedad}>
-          <div className="col-12 col-md-6">
-            <div className="border border-2 border-danger p-2 rounded">
-              <Fotos sobre="propiedad" limite={10} />
+        <h1 className="text-center mt-5 text-secondary">
+          Configuracion de tu Espacio
+        </h1>
 
-              <DetallesMueble
-                inputValues={inputValue}
-                onChangeInputValue={onChangeInputValue}
-              />
-
-              <OfreceAlojamiento
-                values={inputValue.alojamientoPropiedad}
-                onChecked={onCheckedAlojamiento}
-                otros={inputValue.alojamientoPropiedad?.otros}
-                listOtros={otros.alojamiento}
-                setOtros={onSaveOtros}
-                onDeleteOtros={onDeleteOtros}
-                onChangeInputValue={onChangeInputValue}
-              />
-
-              <AmenidadesZona
-                values={inputValue.amenidadesPropiedad}
-                onChecked={onCheckedAmenidades}
-                otrosLugares={inputValue.amenidadesPropiedad?.otrosLugares}
-                listOtros={otros.amenidades}
-                setOtros={onSaveOtros}
-                onDeleteOtros={onDeleteOtros}
-                onChangeInputValue={onChangeInputValue}
-                inputValues={inputValue}
-              />
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className=" border border-3 mx-auto mt-5 shadow">
+              <div className="text-center bg-warning px-3">
+                <p className="fs-5 text-uppercase py-2 fw-bold">
+                  Estas opciones estaran desabilitadas hasta que su cuenta sea
+                  verificada
+                </p>
+              </div>
+              <div className="text-center">
+                <button disabled className="btn btn-primary">
+                  Editar
+                </button>
+                <button disabled className="btn btn-info  mx-3">
+                  Pausar
+                </button>
+                <button disabled className="btn btn-danger">
+                  Elimnar
+                </button>
+                {/* <button  className='btn btn-danger'>Elimnar</button> */}
+              </div>
             </div>
           </div>
-          <div className="col-12 col-md-6">
-            <div className="border border-2 border-danger p-2 rounded">
-              <Fotos sobre="scort" limite={5} />
-              <TuGenero
-                onChecked={onCheckedGenero}
-                values={inputValue.generoScort}
-              />
-              <ServicioOfrecidoA
-                onChecked={onCheckedOfrecido}
-                onChangeInputValue={onChangeInputValue}
-                inputValues={inputValue}
-                values={inputValue?.ofrecidoScort}
-              />
+          <div className="col-md-6">
+            <div className=" border border-3 mx-auto mt-5 shadow">
+              <div className="text-center px-3">
+                <p className="fs-5 text-uppercase py-2 fw-bold">
+                  No tienes ninguna orden
+                </p>
+              </div>
 
-              <button type="submit" className="btn btn-primary">
-                Salvar y Continuar
-              </button>
+
+              <div className="text-center">
+                <button disabled className="btn btn-primary">
+                  Pendientes
+                </button>
+                <button disabled className="btn btn-info  mx-3">
+                  Realizados
+                </button>
+                <button disabled className="btn btn-danger">
+                  Cancelados
+                </button>
+                {/* <button  className='btn btn-danger'>Elimnar</button> */}
+              </div>
             </div>
           </div>
-        </form>
-      </section>
+        </div>
+      </div>
     </Layout>
   );
 };

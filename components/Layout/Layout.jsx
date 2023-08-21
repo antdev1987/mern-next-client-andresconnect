@@ -23,7 +23,7 @@ const Layout = ({ title, children }) => {
           <NavBarComp />
         </header>
 
-        <main className="container-fluid shadow-lg mt-3 flex-fill border">
+        <main className="container-fluid  shadow-lg mt-3 flex-fill border">
           {children}
         </main>
 

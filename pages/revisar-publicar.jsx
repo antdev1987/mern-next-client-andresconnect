@@ -15,6 +15,7 @@ import {
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import getError from '@/utils/getError';
+import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -159,121 +160,33 @@ const perfil = () => {
         { formInfo },
         config
       );
-  
+
       console.log(data, 'DATOS DEL BACK');
       console.log(formInfo, 'Form data');
-      // toast.success("Cambios realizados")
-      router.push('/revisar-publicar')
+      toast.success('Cambios realizados');
     } catch (error) {
-      toast.error(getError(error))
+      toast.error(getError(error));
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(
-        `${process.env.BASE_URL}/espacio/publicar`,
-        config
-      );
-
-      if (!data.espacioInfo) return;
-
-      const { espacioInfo } = data;
-
-      console.log(data, 'datos');
-      setOtros(espacioInfo?.otros || initialOtros);
-
-      // Convierte los arrays a objetos
-      function convertArraysToObjects(data) {
-        const result = {};
-
-        for (const key in data) {
-          if (Array.isArray(data[key])) {
-            const convertedObject = {};
-            data[key].forEach((item) => {
-              convertedObject[item] = true;
-            });
-            result[key] = convertedObject;
-          } else {
-            result[key] = data[key];
-          }
-        }
-
-        return result;
-      }
-
-      const convertido = convertArraysToObjects(espacioInfo);
-
-      // Elimino otros para guardar en el inputValue
-      delete convertido.otros;
-
-      console.log(convertido);
-      setInputValue(convertido);
-    };
-
-    fetchData();
-  }, []);
 
   console.log(inputValue);
 
   return (
     <Layout title="Gestionar tu Espacio">
-      <section className="py-3">
-        <h1>Gestionar tu Espacio</h1>
+      <div>
+        <h2>Aqui van: </h2>
 
-        <form action="#" className="row" onSubmit={submitPropiedad}>
-          <div className="col-12 col-md-6">
-            <div className="border border-2 border-danger p-2 rounded">
-              <Fotos sobre="propiedad" limite={10} />
+        <ul>
+          <li>El titulo</li>
+          <li>El precio</li>
+          <li>El boton de google map</li>
+          <li>foto de perfil</li>
+        </ul>
 
-              <DetallesMueble
-                inputValues={inputValue}
-                onChangeInputValue={onChangeInputValue}
-              />
-
-              <OfreceAlojamiento
-                values={inputValue.alojamientoPropiedad}
-                onChecked={onCheckedAlojamiento}
-                otros={inputValue.alojamientoPropiedad?.otros}
-                listOtros={otros.alojamiento}
-                setOtros={onSaveOtros}
-                onDeleteOtros={onDeleteOtros}
-                onChangeInputValue={onChangeInputValue}
-              />
-
-              <AmenidadesZona
-                values={inputValue.amenidadesPropiedad}
-                onChecked={onCheckedAmenidades}
-                otrosLugares={inputValue.amenidadesPropiedad?.otrosLugares}
-                listOtros={otros.amenidades}
-                setOtros={onSaveOtros}
-                onDeleteOtros={onDeleteOtros}
-                onChangeInputValue={onChangeInputValue}
-                inputValues={inputValue}
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-6">
-            <div className="border border-2 border-danger p-2 rounded">
-              <Fotos sobre="scort" limite={5} />
-              <TuGenero
-                onChecked={onCheckedGenero}
-                values={inputValue.generoScort}
-              />
-              <ServicioOfrecidoA
-                onChecked={onCheckedOfrecido}
-                onChangeInputValue={onChangeInputValue}
-                inputValues={inputValue}
-                values={inputValue?.ofrecidoScort}
-              />
-
-              <button type="submit" className="btn btn-primary">
-                Salvar y Continuar
-              </button>
-            </div>
-          </div>
-        </form>
-      </section>
+        <Link href="/tu-espacio2" className="btn btn-primary">
+          Publicar y Revisar
+        </Link>
+      </div>
     </Layout>
   );
 };
