@@ -169,49 +169,55 @@ const perfil = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(
-        `${process.env.BASE_URL}/espacio/publicar`,
-        config
-      );
+  // Fetchea los checkbox y inputs y los coloca
+  const fetchData = async () => {
+    const { data } = await axios.get(
+      `${process.env.BASE_URL}/espacio/publicar`,
+      config
+    );
 
-      if (!data.espacioInfo) return;
+    if (!data.espacioInfo) return;
 
-      const { espacioInfo } = data;
+    const { espacioInfo } = data;
 
-      console.log(data, 'datos');
-      setOtros(espacioInfo?.otros || initialOtros);
+    console.log('me estoy ejecutando');
+    setOtros(espacioInfo?.otros || initialOtros);
 
-      // Convierte los arrays a objetos
-      function convertArraysToObjects(data) {
-        const result = {};
+    // Convierte los arrays a objetos
+    function convertArraysToObjects(data) {
+      const result = {};
 
-        for (const key in data) {
-          if (Array.isArray(data[key])) {
-            const convertedObject = {};
-            data[key].forEach((item) => {
-              convertedObject[item] = true;
-            });
-            result[key] = convertedObject;
-          } else {
-            result[key] = data[key];
-          }
+      for (const key in data) {
+        if (Array.isArray(data[key])) {
+          const convertedObject = {};
+          data[key].forEach((item) => {
+            convertedObject[item] = true;
+          });
+          result[key] = convertedObject;
+        } else {
+          result[key] = data[key];
         }
-
-        return result;
       }
 
-      const convertido = convertArraysToObjects(espacioInfo);
+      return result;
+    }
 
-      // Elimino otros para guardar en el inputValue
-      delete convertido.otros;
+    const convertido = convertArraysToObjects(espacioInfo);
 
-      console.log(convertido);
-      setInputValue(convertido);
-    };
+    // Elimino otros para guardar en el inputValue
+    delete convertido.otros;
 
-    // 'use client;'
+    console.log(convertido);
+    setInputValue(convertido);
+  };
+
+  // Fetchea en la primera carga
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Fetchea cuando se le da focus a la pagina carga
+  useEffect(() => {
     // Agrega un controlador de eventos para el evento de foco
     window.addEventListener('focus', () => fetchData());
     // console.log('Fui focusiado');
