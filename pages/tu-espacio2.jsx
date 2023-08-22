@@ -174,27 +174,48 @@ const perfil = () => {
   return (
     <Layout title="Espacio 2">
       <div>
-        <div className="p-3 text-center bg-warning">
+        {/* <div className="p-3 text-center bg-warning">
           <h4>
             En estos momentos tu solicitud esta siendo revisada, este proceso
             podria tardar hasta 72 horas
           </h4>
-        </div>
+        </div> */}
 
         <h1 className="text-center mt-5 text-secondary">
           Configuracion de tu Espacio
         </h1>
 
-        <div className="row justify-content-center">
+        <div className="row justify-content-center pb-5">
           <div className="col-md-6">
-            <div className=" border border-3 mx-auto mt-5 shadow">
-              <div className="text-center bg-warning px-3">
-                <p className="fs-5 text-uppercase py-2 fw-bold">
-                  Estas opciones estaran desabilitadas hasta que su cuenta sea
-                  verificada
-                </p>
+            <div className=" mt-5">
+              <div class="card mb-3">
+                <Link href="/tu-espacio" class="text-decoration-none text-dark row g-0">
+                  <div class="col-4">
+                    <img
+                      src="https://a0.muscache.com/im/pictures/857ae784-efa8-426c-b9a2-222a267ff3e2.jpg?im_w=720"
+                      class="h-100 w-100 rounded-start object-fit-cover"
+                      alt="..."
+                      // height={300}
+                    />
+                  </div>
+                  <div class="col-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                        This is a wider card with supporting text below as a
+                        natural lead-in to additional content. This content is a
+                        little bit longer.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-body-secondary">
+                          $ 80
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                </Link>
               </div>
-              <div className="text-center">
+              {/* <div className="text-center">
                 <button disabled className="btn btn-primary">
                   Editar
                 </button>
@@ -204,8 +225,7 @@ const perfil = () => {
                 <button disabled className="btn btn-danger">
                   Elimnar
                 </button>
-                {/* <button  className='btn btn-danger'>Elimnar</button> */}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-md-6">
@@ -215,7 +235,6 @@ const perfil = () => {
                   No tienes ninguna orden
                 </p>
               </div>
-
 
               <div className="text-center">
                 <button disabled className="btn btn-primary">

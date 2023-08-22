@@ -184,7 +184,7 @@ const perfil = () => {
         </ul>
 
         <Link href="/tu-espacio2" className="btn btn-primary">
-          Publicar y Revisar
+          Guardar Cambios
         </Link>
       </div>
     </Layout>
