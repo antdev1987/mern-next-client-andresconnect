@@ -159,13 +159,13 @@ const perfil = () => {
         { formInfo },
         config
       );
-  
+
       console.log(data, 'DATOS DEL BACK');
       console.log(formInfo, 'Form data');
       // toast.success("Cambios realizados")
-      router.push('/revisar-publicar')
+      router.push('/revisar-publicar');
     } catch (error) {
-      toast.error(getError(error))
+      toast.error(getError(error));
     }
   };
 
@@ -211,7 +211,16 @@ const perfil = () => {
       setInputValue(convertido);
     };
 
-    fetchData();
+    // 'use client;'
+    // Agrega un controlador de eventos para el evento de foco
+    window.addEventListener('focus', () => fetchData());
+    // console.log('Fui focusiado');
+
+    // Elimina el controlador de eventos cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('focus', () => fetchData());
+      // console.log('Fui focusiado');
+    };
   }, []);
 
   console.log(inputValue);
