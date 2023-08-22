@@ -188,26 +188,26 @@ const perfil = () => {
         <div className="row justify-content-center pb-5">
           <div className="col-md-6">
             <div className=" mt-5">
-              <div class="card mb-3">
-                <Link href="/tu-espacio" class="text-decoration-none text-dark row g-0">
-                  <div class="col-4">
+              <div className="card mb-3">
+                <Link href="/tu-espacio" className="text-decoration-none text-dark row g-0">
+                  <div className="col-4">
                     <img
                       src="https://a0.muscache.com/im/pictures/857ae784-efa8-426c-b9a2-222a267ff3e2.jpg?im_w=720"
-                      class="h-100 w-100 rounded-start object-fit-cover"
+                      className="h-100 w-100 rounded-start object-fit-cover"
                       alt="..."
                       // height={300}
                     />
                   </div>
-                  <div class="col-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">
+                  <div className="col-8">
+                    <div className="card-body">
+                      <h5 className="card-title">Card title</h5>
+                      <p className="card-text">
                         This is a wider card with supporting text below as a
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </p>
-                      <p class="card-text">
-                        <small class="text-body-secondary">
+                      <p className="card-text">
+                        <small className="text-body-secondary">
                           $ 80
                         </small>
                       </p>
